@@ -1,0 +1,7 @@
+{
+  "name": "angelitha",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
