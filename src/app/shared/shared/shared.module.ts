@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AddUpdateProductComponent } from '../components/add-update-product/add-update-product.component';
 import { 
   IonAccordion, 
   IonAccordionGroup, 
@@ -34,6 +35,7 @@ import {
 } from '@ionic/angular/standalone';
 
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -41,6 +43,7 @@ import {
     IonContent, 
     IonHeader, 
     IonFooter,
+    AddUpdateProductComponent,
     IonTitle, 
     IonToolbar,
     IonAccordion,
@@ -75,7 +78,8 @@ import {
     CommonModule,
     IonContent, 
     IonHeader,
-    IonFooter, 
+    IonFooter,
+    AddUpdateProductComponent, 
     IonTitle, 
     IonToolbar,
     IonAccordion,

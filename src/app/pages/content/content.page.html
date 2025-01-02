@@ -30,9 +30,10 @@
     </div>
   }
 
+  <!-- Crear nuevo prouducto -->
   @if (login()) {
     <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
-      <ion-fab-button color="warning">
+      <ion-fab-button color="warning" (click)="addUpdateProduct()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>

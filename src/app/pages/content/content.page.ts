@@ -5,7 +5,7 @@ import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { ProductItemComponent } from 'src/app/shared/components/product-item/product-item.component';
 import { Product } from 'src/app/interfaces/producto.interfaces';
-import { IonFab } from "@ionic/angular/standalone";
+import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 
 @Component({
   selector: 'app-content',
@@ -17,8 +17,7 @@ import { IonFab } from "@ionic/angular/standalone";
 
 export class ContentPage{
 
-  servicesController = inject(SharedServicesService);
-  
+  servicesController = inject(SharedServicesService); 
 
   visibleElement(){
     return this.servicesController.test();
@@ -34,6 +33,12 @@ export class ContentPage{
 
   login(){
     return this.servicesController.login();
+  }
+
+  addUpdateProduct(){
+    this.servicesController.presentModal({
+      component: AddUpdateProductComponent
+    });
   }
 
   productsList:Product[] = [
