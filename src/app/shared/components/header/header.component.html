@@ -1,0 +1,44 @@
+<ion-header class="text-center">
+
+  <ion-toolbar style="display: flex;" [color]="backgroundColor()">
+    @if (!isMenu()) {
+    <ion-buttons id="principal-menu" slot="start">
+      <ion-button fill="clear"  (click)="openMenu('principal-menu')">
+        <ion-icon slot="end" name="filter-outline"></ion-icon>
+        Productos
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons id="carrito-menu" slot="end" >
+      @if(login()){
+        <ion-button fill="solid" shape="round" color="danger" (click)="logOut()">
+          <ion-icon slot="end" name="log-out-outline" style="margin-left: 10px;" />
+          Cerrar Sesion
+        </ion-button>
+      }@else{
+        <ion-button fill="clear" style="position: relative;" (click)="openCart('carrito-menu')">
+          <div [ngClass]="isFullCart ? 'cart-point' : 'empty-cart'"></div>
+          <ion-icon name="cart-outline" color="dark"></ion-icon>
+        </ion-button>
+      }
+    </ion-buttons>
+    }
+
+    <div class="div-container">
+      @if (isMenu()) {
+      <div class="flex">
+        <ion-button (click)="closeMenu()" fill="clear" color="danger">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-title style="--background: red">{{title()}}</ion-title>
+        <ion-button fill="clear" color="primary">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+      }@else {
+      <ion-img src="assets/logos/angelita-light-min.jpg" class="w-40" (click)="goToAdmin()" />
+      }
+    </div>
+
+  </ion-toolbar>
+</ion-header>

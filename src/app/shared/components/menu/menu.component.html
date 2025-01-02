@@ -1,0 +1,63 @@
+<ion-menu 
+  [menuId]="menuId()" 
+  [contentId]="menuId()" 
+  [side]="side()"
+  >
+
+  <!-- (ionWillOpen)="onWillOpen()"
+       (ionDidOpen)="onDidOpen()" 
+       (ionWillClose)="onWillClose()"
+       (ionDidClose)="onDidClose()" -->
+  @if (isPrincipal()) {
+    <app-header 
+    [isMenu]="true" 
+    [title]="'Productos'" 
+    [backgroundColor]="'warning'" 
+    [closeMenuButton]="'principal-menu'"
+  />
+  <ion-content class="ion-padding" color="warning">
+    <ion-title class="mt-2 mb-2 text-center">
+      Tipo
+      <hr>
+    </ion-title>
+    @for (product of productList; track $index) {
+      <ion-item color="warning">
+        <ion-checkbox labelPlacement="start" (ionChange)="status($event)">{{product}}</ion-checkbox>
+      </ion-item>
+      }
+    <ion-title class="mt-16 mb-2 text-center">
+      Precio
+      <hr>
+    </ion-title>
+    <ion-item  class="flex justify-between" color="warning">
+      <ion-input 
+        label="Desde:" 
+        labelPlacement="floating" 
+        type="number" 
+        placeholder="$00.00"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item color="warning">
+      <ion-input 
+        label="Hasta:" 
+        labelPlacement="floating" 
+        type="number" 
+        placeholder="$99.99"
+      >
+      </ion-input>
+    </ion-item>
+  </ion-content>
+  <app-footer [isMenu]="true"/>
+  }@else {
+    <app-header 
+    [isMenu]="true" 
+    [title]="'Carrito'" 
+    [backgroundColor]="'warning'" 
+    [closeMenuButton]="'carrito-menu'"
+  />
+  <ion-content class="ion-padding" color="warning">
+  </ion-content>
+  <app-footer [isCart]="true"/>
+  }
+</ion-menu>

@@ -1,0 +1,37 @@
+ion-menu::part(backdrop) {
+    display: none;
+    background-color: #ac6100;
+}
+
+ion-menu::part(container){
+    border-radius: 8px;
+}
+
+ion-footer{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.productList{
+    display: flex;
+}
+
+.test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: green;
+    width: 90vh;
+}
+
+ion-checkbox {
+    --size: 24px;
+    --checkbox-background-checked: #a88511;
+}
+  
+ion-checkbox::part(container) {
+    border-radius: 6px 0 6px 0;
+    border: 2px solid #a88511;
+    background: #f1bf73;
+}

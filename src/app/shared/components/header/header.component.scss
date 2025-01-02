@@ -1,0 +1,29 @@
+.div-container{
+    display: grid;
+    place-items: center;
+}
+
+ion-header{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+ion-icon{
+    font-size: 30px;
+}
+
+.cart-point{
+    width: 15px; 
+    height: 15px; 
+    background: red; 
+    color: white;
+    position: absolute; 
+    bottom: 60%; 
+    left: 60%; 
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.empty-cart{
+    display: none;
+}

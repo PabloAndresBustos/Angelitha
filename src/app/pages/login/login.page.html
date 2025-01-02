@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+    <form 
+    class="ion-margin" 
+    style="display: flex; flex-direction: column; width: 60%; margin: 10% auto;"
+    [formGroup]="loginForm"
+    >
+      <img src="assets/logos/angelita-transparente.png" alt="logo" style="width: 30%; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; width: 40%; margin: 30px auto;">
+        <ion-item>
+          <ion-icon slot="start" name="person-outline" />
+          <ion-input
+          type="text"
+          label="Usuario"
+          labelPlacement="floating"
+          [formControl]="loginForm.controls.email"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="lock-closed-outline" />
+          <ion-input
+          type="password"
+          label="Contraseña"
+          labelPlacement="floating"
+          [formControl]="loginForm.controls.password"
+          >
+          </ion-input>
+        </ion-item>
+      </div>
+      <ion-button 
+      expand="block"  
+      shape="round"
+      type="submit"
+      color="warning"
+      style="width: 40%; margin: 10px auto;"
+      (click)="login()"
+      >
+        INGRESAR
+      </ion-button>
+      <ion-button (click)="goToHome()" 
+      expand="block" 
+      fill="clear" 
+      shape="round"
+      style="width: 40%; margin: 10px auto;"
+      >
+        Cancelar
+      </ion-button>>
+    </form>
+</ion-content>

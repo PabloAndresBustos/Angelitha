@@ -1,0 +1,13 @@
+<ion-footer>
+  <ion-toolbar class="text-center" color="warning">
+  @if(isMenu()){
+    <ion-title class="text-xs">PIPablo para Angelitha</ion-title>
+  }
+
+  @if (isCart()) {
+    <ion-button expand="block" fill="outline" (click)="closeCart('carrito-menu')" >
+      Enviar lista
+    </ion-button>
+  }
+  </ion-toolbar>
+</ion-footer>

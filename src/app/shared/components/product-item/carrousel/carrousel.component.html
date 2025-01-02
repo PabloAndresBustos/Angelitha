@@ -1,0 +1,14 @@
+<swiper-container
+speed="800"
+effect="cards"
+grab-cursor="true"
+space-between="30" 
+pagination="true" 
+pagination-clickable="true"
+>
+  @for (picture of pictures; track $index) {
+    <swiper-slide>
+      <img alt="image" [src]="picture" />
+    </swiper-slide>
+  }
+</swiper-container>

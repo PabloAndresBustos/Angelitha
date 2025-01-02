@@ -1,0 +1,32 @@
+<ion-card>
+
+  @if (login()) {
+    <ion-buttons style="display: flex; justify-content: space-around; height: 50px;">
+      <ion-button color="success" fill="solid" shape="round">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Editar
+      </ion-button>
+      <ion-button color="danger" fill="solid" shape="round">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Eliminar
+      </ion-button>
+    </ion-buttons>
+  }
+
+  <app-carrousel />
+  
+  <ion-card-header>
+    <ion-card-title>Card Title</ion-card-title>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Here's a small text description for the card content. Nothing more, nothing less.
+  </ion-card-content>
+
+  <ion-buttons class="flex justify-around mb-2">
+    <ion-button fill="outline" color="primary" shape="round">Mas detalles</ion-button>
+    <ion-button fill="outline" color="primary" shape="round">Agregar al carrito</ion-button>
+  </ion-buttons>
+
+</ion-card>

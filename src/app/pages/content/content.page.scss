@@ -1,0 +1,43 @@
+.productList{
+    display: flex;
+}
+
+ion-content::part(scroll){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-grid{
+    margin-top: 2rem;
+    width: 95%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr));
+    gap: 10px;
+    transition: all .2s ease-out;
+
+}
+
+.product-grid-menu-open{
+    margin-top: 2rem;
+    width: 80%;
+    height: 100%;
+    display: grid;
+    margin-left: 20%;
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    transition: all .2s ease-out;
+}
+
+.product-grid-cart-open{
+    margin-top: 2rem;
+    width: 80%;
+    height: 100%;
+    display: grid;
+    margin-right: 20%;
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    transition: all .2s ease-out;
+}

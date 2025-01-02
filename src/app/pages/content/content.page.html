@@ -1,0 +1,44 @@
+<!-- Inicio Header -->
+<app-header />
+<!-- Fin Header -->
+
+<!-- Menu de la aplicacion -->
+ <app-menu 
+  [menuId]="'principal-menu'" 
+  [isPrincipal]="true" 
+  [side]="'start'"/>
+ <app-menu 
+  [menuId]="'carrito-menu'" 
+  [isPrincipal]="false" 
+  [side]="'end'"/> 
+<!-- Fin del Menu -->
+
+<ion-content style="--background: url(/assets/background.png);">
+ 
+  @if (visibleElement()) {
+    <div 
+      [ngClass]="productEffect() ? 'product-grid-menu-open' : 'product-grid'" 
+      [ngClass]="cartEffect() ? 'product-grid-cart-open' : 'product-grid'"
+    >
+
+    <!-- Modificar con un FOR, para la lista de productos -->
+      <app-product-item />
+      <app-product-item />
+      <app-product-item />
+      <app-product-item />
+      <app-product-item />
+    </div>
+  }
+
+  @if (login()) {
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
+      <ion-fab-button color="warning">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  }
+</ion-content>
+
+<!-- <ion-router-outlet id="principal-menu" main></ion-router-outlet> -->
+
+<!-- <app-footer /> -->
