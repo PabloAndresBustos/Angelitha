@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { register } from 'swiper/element/bundle';
 
@@ -10,6 +10,9 @@ register();
   standalone: true,
   imports: [IonApp, IonRouterOutlet],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
+  ngOnInit() {
+  }
+
 }

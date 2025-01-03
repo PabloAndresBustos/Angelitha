@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MenuController } from "@ionic/angular/standalone";
 import { ModalController, ModalOptions } from "@ionic/angular/standalone";
+import { LoadingController, ToastController, ToastOptions } from "@ionic/angular";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,13 @@ export class SharedServicesService {
 
   menuController = inject(MenuController);
   modalController = inject(ModalController);
+  loadingCtrl = inject(LoadingController);
+  toastController = inject(ToastController);
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
   isMenuOpen = signal<boolean>(false);
   isCartOpen = signal<boolean>(false);
-  login = signal<boolean>(true);
+  login = signal<boolean>(false);
   //menuEffect = signal<boolean>(false);
          
   closeMenu(id:string){
@@ -38,4 +41,16 @@ export class SharedServicesService {
     return this.modalController.dismiss(data)
   }
 
+  /* Loading */
+  loading(){
+    return this.loadingCtrl.create({
+      spinner: 'bubbles'
+    })
+  }
+
+  /* Toast */
+  async presentToast(opts?: ToastOptions) {
+    const toast = await this.toastController.create(opts);
+    toast.present();
+  }
 }
