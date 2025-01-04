@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
+import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/validator-form/validator-form.component';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
@@ -12,7 +13,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule, CustomInputComponent]
+  imports: [SharedModule, ReactiveFormsModule, ValidatorFormComponent]
 })
 export class LoginPage implements OnInit {
 

@@ -1,0 +1,8 @@
+<div style="margin: 0 auto; font-weight: bold; color: red;">
+  @if (showMessage()) {
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <ion-icon [slot]=slot() name="alert-circle-outline" color="red" size="large"></ion-icon>
+    {{message()}}
+  </div>
+  }
+</div>
