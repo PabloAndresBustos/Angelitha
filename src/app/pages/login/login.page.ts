@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
+import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
@@ -11,7 +12,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule]
+  imports: [SharedModule, ReactiveFormsModule, CustomInputComponent]
 })
 export class LoginPage implements OnInit {
 
@@ -21,6 +22,8 @@ export class LoginPage implements OnInit {
 
 
   loginForm = new FormGroup({
+    uid: new FormControl(''),
+    name: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
@@ -30,21 +33,38 @@ export class LoginPage implements OnInit {
   type:string = 'password';
 
   async login(){
+
     if(this.loginForm.valid){
 
       const loading = await this.servicesController.loading();
       loading.present()
 
       this.firebase.login(this.loginForm.value as Usuario).then(res => {
+
+        let uid = res.user.uid;
+        this.loginForm.controls.uid.setValue(uid);
+        
         this.servicesController.login.set(true);
-        this.router.navigateByUrl('/home'); 
+        this.router.navigateByUrl('/home');
+        /* LocalStorage */ 
+        this.servicesController.saveLogin('user', this.loginForm.value);
+
+        let path:string = `Usuario/${uid}`
+
+        /* Creacion de usuario */
+/*         this.firebase.createDocument(path, this.loginForm.value);
+        this.loginForm.controls.name.setValue('Judith')
+        this.firebase.createUser(this.loginForm.value as Usuario) */
+
+        this.userInfo(path, uid);
 
         this.servicesController.presentToast({
-          message: `Bienvenido!!`,
+          message: `BIENVENIDA JUDITH!!`,
           duration: 1500,
           color: 'success',
-          position: 'bottom'
-        })
+          position: 'bottom',
+          icon: 'person-circule-outline'
+        });
 
       }).catch(err => {
         
@@ -61,10 +81,13 @@ export class LoginPage implements OnInit {
       }).finally(() => {
         loading.dismiss();
       })
-    }else{
-      console.log("Formulario invalido")
     }
+  }
 
+  userInfo(path: string, uid:string){
+    this.firebase.obtenerDocumento(path).then((user: Usuario) => {
+      console.log(user);
+    })
   }
 
   showHidePassword(){

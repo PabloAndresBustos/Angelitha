@@ -6,6 +6,8 @@
     >
       <img src="assets/logos/angelita-transparente.png" alt="logo" style="width: 30%; margin: 0 auto;">
       <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
+
+        <!-- Email -->
         <ion-item>
           <ion-icon slot="start" name="person-outline" />
           <ion-input
@@ -15,7 +17,16 @@
           [formControl]="loginForm.controls.email"
           />
         </ion-item>
+
+<!--         <app-custom-input 
+        [slot]="'start'" 
+        [name]="'person-outline'" 
+        [type]="'text'" 
+        [label]="'Usuario'"
+        [formControl] = "loginForm.controls.email"
+        /> -->
         
+        <!-- Password -->
         <ion-item>
           <ion-icon slot="start" name="lock-closed-outline" />
           <ion-input
@@ -25,10 +36,45 @@
           [formControl]="loginForm.controls.password"
           />
           <ion-button (click)="showHidePassword()" slot="end" fill="clear" shape="round">
-            <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+            <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'" size="large"></ion-icon>
           </ion-button>
         </ion-item>
       </div>
+
+      <!-- Validaciones de correo y contraseña -->
+
+      @if (loginForm.controls.email.errors && loginForm.controls.email.touched) {
+        <div style="margin: 0 auto; font-weight: bold; color: red;">
+          @if (loginForm.controls.email.errors?.['required']) {
+            <div>
+              El correo es obligatorio.
+            </div>
+          }
+  
+          @if (loginForm.controls.email.errors?.['email'] ) {
+            <div>
+              Verifica el correo ingresado.
+            </div>
+          }
+        </div>
+      }
+
+      @if (loginForm.controls.password.errors && loginForm.controls.password.touched) {
+        <div style="margin: 0 auto; font-weight: bold; color: red;">
+          @if (loginForm.controls.password.errors?.['required']) {
+            <div>
+              No olvides ingresar la contraseña.
+            </div>
+          }
+  
+          @if (loginForm.controls.password.errors?.['touched']) {
+            <div>
+              No olvides ingresar la contraseña.
+            </div>
+          }
+        </div>
+      }
+
       <ion-button 
       expand="block"  
       shape="round"
@@ -36,6 +82,7 @@
       color="warning"
       style="width: 40%; margin: 10px auto;"
       (click)="login()"
+      [disabled]="this.loginForm.invalid"
       >
         INGRESAR
       </ion-button>
@@ -48,16 +95,4 @@
         Cancelar
       </ion-button>
     </form>
-
-    @if (loginForm.controls.email.errors && loginForm.controls.password.errors) {
-      <div>
-        @if (loginForm.controls.email.errors?.['required'] || loginForm.controls.email.errors?.['email'] ) {
-          <div>
-            Verifica el correo ingresado.
-          </div>
-        }
-
-      </div>
-    }
-
 </ion-content>

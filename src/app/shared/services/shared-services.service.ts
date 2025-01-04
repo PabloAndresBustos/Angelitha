@@ -53,4 +53,13 @@ export class SharedServicesService {
     const toast = await this.toastController.create(opts);
     toast.present();
   }
+
+  /* Local Storage */
+  saveLogin(key: string, value: any){
+    return localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  readLocalStorage(key: string){
+    return JSON.parse(localStorage.getItem(key));
+  }
 }
