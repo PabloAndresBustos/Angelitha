@@ -1,8 +1,9 @@
 <ion-item>
-  <ion-icon [slot]=slot() [name]=name() />
-  <ion-input
-  [type]=type()
-  [label]=label()
-  labelPlacement="floating"
-  />
+  <ion-icon slot="start" [name]=iconName() />
+  <ion-input [type]="inputType" [label]=inputLabel() labelPlacement="floating" [formControl]="formControlValue()" />
+  @if (isPassword()) {
+  <ion-button (click)="showHidePassword()" slot="end" fill="clear" shape="round">
+    <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'" size="large"></ion-icon>
+  </ion-button>
+  }
 </ion-item>

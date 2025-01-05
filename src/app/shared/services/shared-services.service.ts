@@ -62,4 +62,5 @@ export class SharedServicesService {
   readLocalStorage(key: string){
     return JSON.parse(localStorage.getItem(key));
   }
+
 }

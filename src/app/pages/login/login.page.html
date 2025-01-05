@@ -5,20 +5,23 @@
     <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
 
       <!-- Email -->
-      <ion-item>
-        <ion-icon slot="start" name="person-outline" />
-        <ion-input type="text" label="Usuario" labelPlacement="floating" [formControl]="loginForm.controls.email" />
-      </ion-item>
+      <app-custom-input 
+      [iconName]="'person-outline'"
+      [inputType]="'email'"
+      [inputLabel]="'Usuario'"
+      [formControlValue]="loginForm.controls.email"
+      [isPassword]="false"
+      />
 
       <!-- Password -->
-      <ion-item>
-        <ion-icon slot="start" name="lock-closed-outline" />
-        <ion-input [type]="type" label="Contraseña" labelPlacement="floating"
-          [formControl]="loginForm.controls.password" />
-        <ion-button (click)="showHidePassword()" slot="end" fill="clear" shape="round">
-          <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'" size="large"></ion-icon>
-        </ion-button>
-      </ion-item>
+      <app-custom-input 
+      [iconName]="'lock-closed-outline'"
+      [inputType]="'password'"
+      [inputLabel]="'Contraseña'"
+      [formControlValue]="loginForm.controls.password"
+      [isPassword]="true"
+      />
+
     </div>
 
     <!-- Validaciones de correo y contraseña -->
@@ -43,8 +46,10 @@
       (click)="login()" [disabled]="this.loginForm.invalid">
       INGRESAR
     </ion-button>
+
     <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" style="width: 40%; margin: 10px auto;">
       Cancelar
     </ion-button>
+    
   </form>
 </ion-content>

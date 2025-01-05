@@ -1,5 +1,6 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, Input, input, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-input',
@@ -8,15 +9,23 @@ import { SharedModule } from '../../shared/shared.module';
   standalone: true,
   imports: [SharedModule]
 })
-export class CustomInputComponent  implements OnInit {
+export class CustomInputComponent implements OnInit {
 
-  slot = input.required<string>();
-  name  = input.required<string>();
-  type  = input.required<string>();
-  label  = input.required<string>();
+  @Input() inputType:string;
+  iconName = input.required<string>();
+  inputLabel = input.required<string>();
+  formControlValue = input<FormControl>();
 
-  constructor() { }
+  /* Mostrar o Ocultar Password */
+  isPassword = input.required<boolean>();
+  hide: boolean = true;
+  type:string = 'password';
 
-  ngOnInit() {}
+  showHidePassword() {
+    this.hide = !this.hide
+    this.hide ? this.inputType = 'password' : this.inputType = 'text'
+  }
+
+  ngOnInit() { }
 
 }

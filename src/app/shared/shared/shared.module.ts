@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUpdateProductComponent } from '../components/add-update-product/add-update-product.component';
 import { 
   IonAccordion, 
@@ -71,7 +71,8 @@ import {
     IonRouterOutlet,
     FormsModule,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    ReactiveFormsModule
   ],
   exports:[
     CommonModule,
@@ -107,7 +108,8 @@ import {
     IonRouterOutlet,
     FormsModule,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

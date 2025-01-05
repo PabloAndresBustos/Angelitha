@@ -13,14 +13,13 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule, ValidatorFormComponent]
+  imports: [SharedModule, ReactiveFormsModule, ValidatorFormComponent, CustomInputComponent]
 })
 export class LoginPage implements OnInit {
 
   router = inject(Router);
   servicesController = inject(SharedServicesService);
   firebase = inject(FirebaseService);
-
 
   loginForm = new FormGroup({
     uid: new FormControl(''),
@@ -29,9 +28,6 @@ export class LoginPage implements OnInit {
     password: new FormControl('', [Validators.required])
   });
 
-  isPassword: boolean;
-  hide: boolean = true;
-  type:string = 'password';
 
   async login(){
 
@@ -89,12 +85,6 @@ export class LoginPage implements OnInit {
     this.firebase.obtenerDocumento(path).then((user: Usuario) => {
       console.log(user);
     })
-  }
-
-  showHidePassword(){
-    this.hide = !this.hide
-
-    this.hide ? this.type = 'password' : this.type = 'text'
   }
 
   goToHome(){
