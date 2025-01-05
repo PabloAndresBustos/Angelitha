@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
@@ -13,7 +13,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule, ValidatorFormComponent, CustomInputComponent]
+  imports: [SharedModule, ValidatorFormComponent, CustomInputComponent]
 })
 export class LoginPage implements OnInit {
 
@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
           duration: 1500,
           color: 'success',
           position: 'bottom',
-          icon: 'person-circule-outline'
+          icon: 'person-outline'
         });
 
       }).catch(err => {
@@ -87,11 +87,21 @@ export class LoginPage implements OnInit {
     })
   }
 
+  autoLogin(){
+    const user:any = localStorage.getItem('user');
+    if(user){
+      const userObject = JSON.parse(user);
+      this.loginForm.controls.email.setValue(userObject.email);
+      this.loginForm.controls.password.setValue(userObject.password);
+    }
+  }
+
   goToHome(){
     this.router.navigateByUrl('/home');
   }
 
   ngOnInit() {
+    this.autoLogin();
   }
 
 }

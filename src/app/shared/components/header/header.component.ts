@@ -52,7 +52,7 @@ export class HeaderComponent{
 
   logOut(){
     this.serviceController.login.set(false);
-    this.router.navigateByUrl('/home');
+    /* localStorage.removeItem('user'); */
   }
 
 }

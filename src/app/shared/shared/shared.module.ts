@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddUpdateProductComponent } from '../components/add-update-product/add-update-product.component';
 import { 
   IonAccordion, 
   IonAccordionGroup, 
@@ -42,7 +41,6 @@ import {
     IonContent, 
     IonHeader, 
     IonFooter,
-    AddUpdateProductComponent,
     IonTitle, 
     IonToolbar,
     IonAccordion,
@@ -79,7 +77,6 @@ import {
     IonContent, 
     IonHeader,
     IonFooter,
-    AddUpdateProductComponent, 
     IonTitle, 
     IonToolbar,
     IonAccordion,

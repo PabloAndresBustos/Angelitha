@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment';
 import { Firestore, getFirestore, setDoc, getDoc, doc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 
 @Injectable({

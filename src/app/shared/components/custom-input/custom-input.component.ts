@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 })
 export class CustomInputComponent implements OnInit {
 
-  @Input() inputType:string;
+  @Input() inputType!:string;
   iconName = input.required<string>();
   inputLabel = input.required<string>();
   formControlValue = input<FormControl>();
@@ -19,7 +19,6 @@ export class CustomInputComponent implements OnInit {
   /* Mostrar o Ocultar Password */
   isPassword = input.required<boolean>();
   hide: boolean = true;
-  type:string = 'password';
 
   showHidePassword() {
     this.hide = !this.hide
