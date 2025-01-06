@@ -89,12 +89,15 @@ export class LoginPage implements OnInit {
     const user:any = this.servicesController.readLocalStorage('user');
     if(user){
       this.loginForm.controls.email.setValue(user.email);
-      this.loginForm.controls.password.setValue(user.password);
     }
   }
 
   goToHome(){
     this.router.navigateByUrl('/home');
+  }
+
+  goToRegister(){
+    this.router.navigateByUrl('/register');
   }
 
   ngOnInit() {

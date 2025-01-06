@@ -1,9 +1,9 @@
 <ion-item>
-  <ion-icon slot="start" [name]=iconName() />
-  <ion-input [type]="inputType" [label]=inputLabel() labelPlacement="floating" [formControl]="formControlValue()" />
+  <ion-icon slot="start" [name]=iconName() color="warning"/>
+  <ion-input [type]="inputType" [label]=inputLabel() labelPlacement="floating" [formControl]="formControlValue()" color="warning"/>
   @if (isPassword()) {
   <ion-button (click)="showHidePassword()" slot="end" fill="clear" shape="round">
-    <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'" size="large"></ion-icon>
+    <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline'" size="large" color="warning"></ion-icon>
   </ion-button>
   }
 </ion-item>
