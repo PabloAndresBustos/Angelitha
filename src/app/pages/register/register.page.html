@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <form class="loginForm" [formGroup]="registerForm">
+    <img src="assets/logos/angelita-transparente.png" alt="logo" style="width: 30%; margin: 0 auto;">
+    <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
+
+      <!-- Username -->
+      <app-custom-input [iconName]="'person-outline'" [inputType]="'text'" [inputLabel]="'Nombre'"
+        [formControlValue]="registerForm.controls.name" [isPassword]="false" />
+
+      <!-- Email -->
+      <app-custom-input [iconName]="'mail-outline'" [inputType]="'email'" [inputLabel]="'Usuario'"
+        [formControlValue]="registerForm.controls.email" [isPassword]="false" />
+
+      <!-- Password -->
+      <app-custom-input [iconName]="'lock-closed-outline'" [inputType]="'password'" [inputLabel]="'Contraseña'"
+        [formControlValue]="registerForm.controls.password" [isPassword]="true" />
+
+    </div>
+
+    <!-- Validaciones de correo, contraseña y nombre -->
+
+    @if (registerForm.controls.name.errors && registerForm.controls.name.touched) {
+    <app-validator-form [slot]="'start'" [message]="'El nombre es Requerido.'"
+      [showMessage]="registerForm.controls.name.errors?.['required']" />
+
+    <app-validator-form [slot]="'start'" [message]="'El nombre debe tener al menos 6 caracteres.'"
+      [showMessage]="registerForm.controls.name.errors?.['minlength']" />
+    }
+
+    @if(registerForm.controls.email.errors && registerForm.controls.email.touched){
+    <app-validator-form [slot]="'start'" [message]="'El correo es obligatorio'"
+      [showMessage]="registerForm.controls.email.errors?.['required']" />
+
+    <app-validator-form [slot]="'start'" [message]="'Verifica el correo ingresado.'"
+      [showMessage]="registerForm.controls.email.errors?.['email']" />
+    }
+
+    @if (registerForm.controls.password.errors && registerForm.controls.password.touched) {
+    <app-validator-form [slot]="'start'" [message]="'No olvides ingresar la contraseña.'"
+      [showMessage]="registerForm.controls.password.errors?.['required']" />
+
+    <app-validator-form [slot]="'start'" [message]="'No olvides ingresar la contraseña.'"
+      [showMessage]="registerForm.controls.password.errors?.['touched']" />
+    }
+
+
+    <ion-button expand="block" shape="round" type="submit" color="warning" style="width: 40%; margin: 10px auto;"
+      (click)="register()" [disabled]="this.registerForm.invalid">
+      REGISTRAR
+    </ion-button>
+
+    <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" style="width: 40%; margin: 10px auto;">
+      Cancelar
+    </ion-button>
+
+  </form>
+</ion-content>

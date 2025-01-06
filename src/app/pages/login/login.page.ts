@@ -39,25 +39,22 @@ export class LoginPage implements OnInit {
       this.firebase.login(this.loginForm.value as Usuario).then(res => {
 
         let uid = res.user.uid;
+        let userName = res.user.displayName;
         this.loginForm.controls.uid.setValue(uid);
         
         this.servicesController.login.set(true);
         this.router.navigateByUrl('/home');
+
         /* LocalStorage */ 
+        /* delete this.loginForm.controls.password; */
         this.servicesController.saveLogin('user', this.loginForm.value);
 
-        let path:string = `Usuario/${uid}`
-
-        /* Creacion de usuario */
-/*         this.firebase.createDocument(path, this.loginForm.value);
-        this.loginForm.controls.name.setValue('Judith')
-        this.firebase.createUser(this.loginForm.value as Usuario) */
-
-        this.userInfo(path, uid);
+        /* let path:string = `Usuario/${uid}`
+        this.userInfo(path, uid); */
 
         this.servicesController.presentToast({
           header: 'BIENVENIDO',
-          message: `HOLA JUDITH!!`,
+          message: `HOLA! ${userName.toUpperCase()}!!`,
           duration: 1500,
           color: 'success',
           position: 'bottom',
@@ -89,11 +86,10 @@ export class LoginPage implements OnInit {
   }
 
   autoLogin(){
-    const user:any = localStorage.getItem('user');
+    const user:any = this.servicesController.readLocalStorage('user');
     if(user){
-      const userObject = JSON.parse(user);
-      this.loginForm.controls.email.setValue(userObject.email);
-      this.loginForm.controls.password.setValue(userObject.password);
+      this.loginForm.controls.email.setValue(user.email);
+      this.loginForm.controls.password.setValue(user.password);
     }
   }
 

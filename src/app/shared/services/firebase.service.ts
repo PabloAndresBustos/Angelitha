@@ -1,10 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { initializeApp } from '@angular/fire/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment';
 import { Firestore, getFirestore, setDoc, getDoc, doc } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -16,13 +15,18 @@ export class FirebaseService {
   fireApp = initializeApp(environment.firebaseConfig);
   fireAuth = getAuth(this.fireApp);
 
-  /* Autenticacion */
+  /* Autenticacion y creacion de usuario */
   login(user: Usuario){
+    console.log(user);
     return signInWithEmailAndPassword(this.fireAuth, user.email, user.password);
   }
 
   createUser(user: Usuario){
-    return createUserWithEmailAndPassword(this.fireAuth, user.email, user.name);
+    return createUserWithEmailAndPassword(this.fireAuth, user.email, user.password);
+  }
+
+  updateUser(displayName: string){
+    return updateProfile(this.fireAuth.currentUser, { displayName });
   }
 
   logOut(){
@@ -31,8 +35,8 @@ export class FirebaseService {
 
 
   /* Base de datos */
-  createDocument(path: string, data: any){
-    return setDoc(
+  async createDocument(path: string, data: any){
+    return await setDoc(
       doc(
         getFirestore(), path
       ), 
