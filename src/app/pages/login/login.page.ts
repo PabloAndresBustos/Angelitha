@@ -85,6 +85,10 @@ export class LoginPage implements OnInit {
     })
   }
 
+  logInWithGoogle(){
+    return this.firebase.logInWithGoogle();
+  }
+
   autoLogin(){
     const user:any = this.servicesController.readLocalStorage('user');
     if(user){
