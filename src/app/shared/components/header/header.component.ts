@@ -2,6 +2,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { SharedServicesService } from '../../services/shared-services.service';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent{
 
   serviceController = inject(SharedServicesService);
+  firebase = inject(FirebaseService);
   router = inject(Router);
 
   title = input<string>('');
@@ -51,7 +53,9 @@ export class HeaderComponent{
   }
 
   logOut(){
+    this.firebase.logOut();
     this.serviceController.login.set(false);
+    this.router.navigateByUrl('/home');
     /* localStorage.removeItem('user'); */
   }
 

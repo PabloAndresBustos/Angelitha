@@ -1,0 +1,12 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .loginForm{
+        width: 100%;
+    }
+}

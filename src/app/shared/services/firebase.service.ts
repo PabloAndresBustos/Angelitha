@@ -25,6 +25,10 @@ export class FirebaseService {
     return createUserWithEmailAndPassword(this.fireAuth, user.email, user.name);
   }
 
+  logOut(){
+    return this.fireAuth.signOut();
+  }
+
 
   /* Base de datos */
   createDocument(path: string, data: any){

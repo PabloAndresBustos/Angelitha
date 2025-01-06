@@ -56,7 +56,8 @@ export class LoginPage implements OnInit {
         this.userInfo(path, uid);
 
         this.servicesController.presentToast({
-          message: `BIENVENIDA JUDITH!!`,
+          header: 'BIENVENIDO',
+          message: `HOLA JUDITH!!`,
           duration: 1500,
           color: 'success',
           position: 'bottom',
@@ -70,7 +71,7 @@ export class LoginPage implements OnInit {
           duration: 2500,
           color: 'danger',
           position: 'middle',
-          icon: 'alert-circle-outline'
+          icon: 'alert-circle-outline',
         });
 
         this.servicesController.login.set(false);
