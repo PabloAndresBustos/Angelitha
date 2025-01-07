@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/validator-form/validator-form.component';
@@ -85,8 +86,34 @@ export class LoginPage implements OnInit {
     })
   }
 
-  logInWithGoogle(){
-    return this.firebase.logInWithGoogle();
+  async logInWithGoogle(){
+    const googleAuth = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
+
+        this.router.navigateByUrl('/home');
+  
+        this.servicesController.presentToast({
+          header: 'BIENVENIDO',
+          message: `HOLA! ${res.user.displayName.toUpperCase()}!!`,
+          duration: 1500,
+          color: 'success',
+          position: 'bottom',
+          icon: 'person-outline'
+        });
+  
+      })  
+    } catch (err) {
+      
+      this.servicesController.presentToast({
+        message: `Error de usuario o contraseña: ${err.message}`,
+        duration: 2500,
+        color: 'danger',
+        position: 'middle',
+        icon: 'alert-circle-outline',
+      });
+    }
+  
   }
 
   autoLogin(){

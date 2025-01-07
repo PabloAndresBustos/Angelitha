@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { initializeApp } from '@angular/fire/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup, UserCredential, signInWithRedirect } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment';
 import { Firestore, getFirestore, setDoc, getDoc, doc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,9 +13,10 @@ import { Firestore, getFirestore, setDoc, getDoc, doc } from '@angular/fire/fire
 export class FirebaseService {
 
   fireStore = inject(Firestore);
+  router = inject(Router);
   fireApp = initializeApp(environment.firebaseConfig);
   fireAuth = getAuth(this.fireApp);
-
+  
   /* Autenticacion y creacion de usuario */
   login(user: Usuario) {
     console.log(user);
@@ -32,16 +34,6 @@ export class FirebaseService {
   logOut() {
     return this.fireAuth.signOut();
   }
-
-
-  /* Logeo con Google */
-  async logInWithGoogle() {
-    const googleAuth = new GoogleAuthProvider();
-    await signInWithPopup(this.fireAuth, googleAuth).then((data: UserCredential) => {
-      console.log(data);
-    })
-  }
-
 
   /* Base de datos */
   async createDocument(path: string, data: any) {
