@@ -4,8 +4,7 @@
     @if (!isMenu()) {
     <ion-buttons id="principal-menu" slot="start">
       <ion-button fill="clear"  (click)="openMenu('principal-menu')">
-        <ion-icon slot="end" name="filter-outline"></ion-icon>
-        Productos
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -36,7 +35,7 @@
         </ion-button>
       </div>
       }@else {
-      <ion-img src="assets/logos/angelita-light-min.jpg" class="w-40" (click)="goToAdmin()" />
+      <ion-img src="assets/logos/angelita-light-min.jpg" class="imageLogo" (click)="goToAdmin()" />
       }
     </div>
 

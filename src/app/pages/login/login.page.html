@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <form class="loginForm" [formGroup]="loginForm">
     <img src="assets/logos/angelita-transparente.png" alt="logo" style="width: 30%; margin: 0 auto;">
-    <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
+    <div class="formContent">
 
       <!-- Email -->
       <app-custom-input 
@@ -41,21 +41,21 @@
       [showMessage]="loginForm.controls.password.errors?.['touched']" />
     }
 
-    <ion-button expand="block" shape="round" type="submit" color="warning" style="width: 40%; margin: 10px auto;"
+    <ion-button expand="block" shape="round" type="submit" color="warning" class="formButton"
       (click)="login()" [disabled]="this.loginForm.invalid">
       INGRESAR
     </ion-button>
 
-    <ion-button (click)="goToRegister()" expand="block" fill="outline" shape="round" color="warning" style="width: 40%; margin: 10px auto;">
+    <ion-button (click)="goToRegister()" expand="block" fill="outline" shape="round" color="warning" class="formButton">
       REGISTRAR
     </ion-button>
 
-    <ion-button (click)="logInWithGoogle()" expand="block" fill="outline" shape="round" color="warning" style="width: 40%; margin: 10px auto;">
+    <ion-button (click)="logInWithGoogle()" expand="block" fill="outline" shape="round" color="warning" class="formButton">
       <ion-icon slot="icon-only" name="logo-google" style="margin-right: 10px;"></ion-icon>
       REGISTRAR CON GOOGLE
     </ion-button>
 
-    <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" color="warning" style="width: 40%; margin: 10px auto;">
+    <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" color="warning" class="formButton">
       Cancelar
     </ion-button>
     

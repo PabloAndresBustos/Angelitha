@@ -92,6 +92,7 @@ export class LoginPage implements OnInit {
       await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
 
         this.router.navigateByUrl('/home');
+        this.servicesController.login.set(true);
   
         this.servicesController.presentToast({
           header: 'BIENVENIDO',

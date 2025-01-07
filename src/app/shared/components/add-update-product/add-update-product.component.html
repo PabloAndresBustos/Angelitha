@@ -1,9 +1,32 @@
-<app-header  
-[isMenu]="false"
-[backgroundColor]="'warning'" 
-[title]="'Nuevo Producto'"
-/>
+<form class="registerProduct">
+  <img src="../../../../assets/logos/angelita-light-min.jpg" alt="Imagen de producto" style="width: 40%; margin: 0 auto;">
+  <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
+    <app-custom-input
+    [isPassword]="false"
+    [inputLabel]="'Nombre de producto'"
+    [inputType]="'text'"
+    [iconName]="'add'"
+    />
 
-<p>
-  add-update-product works!
-</p>
+    <app-custom-input
+    [isPassword]="false"
+    [inputLabel]="'Subtipo de producto'"
+    [inputType]="'text'"
+    [iconName]="'add'"
+    />
+
+    <app-custom-input
+    [isPassword]="false"
+    [inputLabel]="'Precio'"
+    [inputType]="'number'"
+    [iconName]="'add'"
+    />
+
+    <ion-item>
+    <ion-label position="floating" color="warning">Descripcion</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+
+
+  </div>
+</form>

@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <form class="loginForm" [formGroup]="registerForm">
     <img src="assets/logos/angelita-transparente.png" alt="logo" style="width: 30%; margin: 0 auto;">
-    <div style="display: flex; flex-direction: column; width: 80%; margin: 30px auto;">
+    <div class="formContent">
 
       <!-- Username -->
       <app-custom-input [iconName]="'person-outline'" [inputType]="'text'" [inputLabel]="'Nombre'"
@@ -44,12 +44,12 @@
     }
 
 
-    <ion-button expand="block" shape="round" type="submit" color="warning" style="width: 40%; margin: 10px auto;"
+    <ion-button expand="block" shape="round" type="submit" color="warning" class="formButton"
       (click)="register()" [disabled]="this.registerForm.invalid">
       REGISTRAR
     </ion-button>
 
-    <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" color="warning" style="width: 40%; margin: 10px auto;">
+    <ion-button (click)="goToHome()" expand="block" fill="clear" shape="round" color="warning" class="formButton">
       Cancelar
     </ion-button>
 

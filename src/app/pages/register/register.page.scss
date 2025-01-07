@@ -5,8 +5,29 @@
     margin: 0 auto;
 }
 
+.formContent{
+    display: flex; 
+    flex-direction: column; 
+    width: 80%; 
+    margin: 30px auto;
+}
+
+.formButton{
+    width: 40%; 
+    margin: 10px auto;
+}
+
 @media (max-width: 768px) {
     .loginForm{
         width: 100%;
+    }
+    
+    .formContent{
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .formButton{
+        width: 80%;
     }
 }

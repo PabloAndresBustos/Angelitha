@@ -27,3 +27,9 @@ ion-icon{
 .empty-cart{
     display: none;
 }
+
+@media (max-width: 768px) {
+    .imageLogo{
+        width: 40%;
+    }
+}
