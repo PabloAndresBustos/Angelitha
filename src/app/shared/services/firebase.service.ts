@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { initializeApp } from '@angular/fire/app';
+import { FirebaseOptions, initializeApp } from '@angular/fire/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment';
@@ -14,8 +14,29 @@ export class FirebaseService {
 
   fireStore = inject(Firestore);
   router = inject(Router);
-  fireApp = initializeApp(environment.firebaseConfig);
-  fireAuth = getAuth(this.fireApp);
+  config;
+  fireApp;
+  fireAuth;
+
+
+  firebaseMode(){
+    if(environment.production){
+      this.config = {
+        "projectId": process.env["FIREBASE_PROJECT_ID"],
+        "appId":process.env["FIREBASE_APP_ID"],
+        "storageBucket":process.env["FIREBASE_STORAGE_ID"],
+        "apiKey":process.env["FIREBASE_API_KEY_ID"],
+        "authDomain":process.env["FIREBASE_AUTH_ID"],
+        "messagingSenderId":process.env["FIREBASE_MESSAGING_ID"]
+      }
+    }else{
+      this.config = environment.firebaseConfig
+    }
+
+    this.fireApp = initializeApp(this.config);
+    this.fireAuth = getAuth(this.fireApp);
+  }
+
   
   /* Autenticacion y creacion de usuario */
   login(user: Usuario) {

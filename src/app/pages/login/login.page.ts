@@ -134,6 +134,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.autoLogin();
+    this.firebase.firebaseMode();
   }
 
 }

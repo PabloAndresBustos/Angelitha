@@ -29,7 +29,7 @@ export class RegisterPage implements OnInit {
   })
 
   async register() {
-    console.log(this.registerForm.value);
+    
     if (this.registerForm.valid) {
 
       const loading = await this.servicesController.loading();
@@ -93,7 +93,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.firebase.firebaseMode();
   }
 
 }

@@ -36,12 +36,12 @@ export class HeaderComponent{
 
   openMenu(id:string){
     this.serviceController.openMenu(id);
-    this.serviceController.isMenuOpen.update(value => !value);
+    /* this.serviceController.isMenuOpen.update(value => !value); */
   }
 
   openCart(id:string){
     this.serviceController.openMenu(id);
-    this.serviceController.isCartOpen.update(value => !value);
+    /* this.serviceController.isCartOpen.update(value => !value); */
   }
 
   goToAdmin(){

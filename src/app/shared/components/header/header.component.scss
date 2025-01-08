@@ -28,8 +28,16 @@ ion-icon{
     display: none;
 }
 
+.productButton{
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     .imageLogo{
         width: 40%;
+    }
+
+    .productButton{
+        display: none;
     }
 }
