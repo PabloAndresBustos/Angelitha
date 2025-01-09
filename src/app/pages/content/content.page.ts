@@ -6,29 +6,26 @@ import { SharedServicesService } from 'src/app/shared/services/shared-services.s
 import { ProductItemComponent } from 'src/app/shared/components/product-item/product-item.component';
 import { Product } from 'src/app/interfaces/producto.interfaces';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.page.html',
   styleUrls: ['./content.page.scss'],
   standalone: true,
-  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent]
+  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent]
 })
 
 export class ContentPage{
 
   servicesController = inject(SharedServicesService); 
 
+  isMobile(){
+    return this.servicesController.isMobile();
+  }
+
   visibleElement(){
     return this.servicesController.test();
-  }
-
-  productEffect(){
-    return this.servicesController.isMenuOpen();
-  }
-
-  cartEffect(){
-    return this.servicesController.isCartOpen();
   }
 
   login(){

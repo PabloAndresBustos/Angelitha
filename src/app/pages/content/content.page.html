@@ -1,5 +1,8 @@
 <!-- Inicio Header -->
-<app-header />
+ @if (!isMobile()) {
+  <app-header />
+ }
+
 <!-- Fin Header -->
 
 <!-- Menu de la aplicacion -->
@@ -16,10 +19,7 @@
 <ion-content style="--background: url(/assets/background.png);">
  
   @if (visibleElement()) {
-    <div 
-      [ngClass]="productEffect() ? 'product-grid-menu-open' : 'product-grid'" 
-      [ngClass]="cartEffect() ? 'product-grid-cart-open' : 'product-grid'"
-    >
+    <div class="product-grid">
 
     <!-- Modificar con un FOR, para la lista de productos -->
       <app-product-item />
@@ -42,4 +42,6 @@
 
 <!-- <ion-router-outlet id="principal-menu" main></ion-router-outlet> -->
 
-<!-- <app-footer /> -->
+@if (isMobile()) {
+  <app-footer />
+}

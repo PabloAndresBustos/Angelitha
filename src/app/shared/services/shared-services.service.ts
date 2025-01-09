@@ -12,12 +12,11 @@ export class SharedServicesService {
   modalController = inject(ModalController);
   loadingCtrl = inject(LoadingController);
   toastController = inject(ToastController);
+
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
-  isMenuOpen = signal<boolean>(false);
-  isCartOpen = signal<boolean>(false);
   login = signal<boolean>(false);
-  //menuEffect = signal<boolean>(false);
+  isMobile = signal<boolean>(false);
          
   closeMenu(id:string){
     this.menuController.close(id);

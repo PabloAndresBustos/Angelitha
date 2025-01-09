@@ -1,13 +1,14 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { SharedServicesService } from '../../services/shared-services.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
-  imports: [SharedModule]
+  imports: [SharedModule, HeaderComponent]
 })
 export class FooterComponent{
 

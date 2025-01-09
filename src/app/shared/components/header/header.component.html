@@ -4,22 +4,22 @@
     @if (!isMenu()) {
     <ion-buttons id="principal-menu" slot="start">
       <ion-button fill="clear"  (click)="openMenu('principal-menu')">
-        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+        <ion-icon slot="end" name="filter-outline" size="large" color="warning"></ion-icon>
+        <p class="productButton" >PRODUCTOS</p>
       </ion-button>
     </ion-buttons>
 
     <ion-buttons id="carrito-menu" slot="end" >
       @if(login()){
-        <ion-button fill="solid" shape="round" color="danger" (click)="logOut()">
-          <ion-icon slot="end" name="log-out-outline" style="margin-left: 10px;" />
-          Cerrar Sesion
-        </ion-button>
-      }@else{
-        <ion-button fill="clear" style="position: relative;" (click)="openCart('carrito-menu')">
-          <div [ngClass]="isFullCart ? 'cart-point' : 'empty-cart'"></div>
-          <ion-icon name="cart-outline" color="dark"></ion-icon>
+        <ion-button [fill]="logOutButton ? 'clear' : 'fill'" shape="round" color="warning" (click)="logOut()">
+          <ion-icon [slot]="logOutButton ? 'end' : 'icon-only'" name="log-out-outline" style="margin-left: 10px; font-size: 24px;" />
+          <p class="productButton" >Cerrar Sesion</p>
         </ion-button>
       }
+        <ion-button fill="clear" style="position: relative;" (click)="openCart('carrito-menu')">
+          <div [ngClass]="isFullCart ? 'cart-point' : 'empty-cart'"></div>
+          <ion-icon name="cart-outline" color="warning"></ion-icon>
+        </ion-button>
     </ion-buttons>
     }
 

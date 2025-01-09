@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { SharedServicesService } from '../../services/shared-services.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { FirebaseService } from '../../services/firebase.service';
   standalone: true,
   imports: [SharedModule]
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
 
   serviceController = inject(SharedServicesService);
   firebase = inject(FirebaseService);
@@ -25,23 +25,15 @@ export class HeaderComponent{
   isFullCart = this.serviceController.isFullCart();
 
   closeMenu(){
-    this.serviceController.closeMenu(this.closeMenuButton());
-    
-    if(this.serviceController.isMenuOpen()){
-      this.serviceController.isMenuOpen.update(value => !value);
-    }else if(this.serviceController.isCartOpen()){
-      this.serviceController.isCartOpen.update(value => !value);
-    }
+    this.serviceController.closeMenu(this.closeMenuButton());    
   }
 
   openMenu(id:string){
     this.serviceController.openMenu(id);
-    this.serviceController.isMenuOpen.update(value => !value);
   }
 
   openCart(id:string){
     this.serviceController.openMenu(id);
-    this.serviceController.isCartOpen.update(value => !value);
   }
 
   goToAdmin(){
@@ -52,11 +44,20 @@ export class HeaderComponent{
     return this.serviceController.login();
   }
 
+  logOutButton(){
+    console.log(this.serviceController.isMobile());
+    return this.serviceController.isMobile();
+  }
+
   logOut(){
     this.firebase.logOut();
     this.serviceController.login.set(false);
     this.router.navigateByUrl('/home');
     /* localStorage.removeItem('user'); */
+  }
+
+  ngOnInit(): void {
+    this.logOutButton()
   }
 
 }
