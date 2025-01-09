@@ -32,8 +32,8 @@ export class RegisterPage implements OnInit {
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
 
-      const loading = await this.servicesController.loading();
-      loading.present();
+      /* const loading = await this.servicesController.loading();
+      loading.present(); */
 
       return this.firebase.createUser(this.registerForm.value as Usuario).then(async res => {
 
@@ -73,7 +73,7 @@ export class RegisterPage implements OnInit {
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
       }).finally(() => {
-        loading.dismiss()
+        console.log('REGISTRO CORRECTO')
       })
     }
   }

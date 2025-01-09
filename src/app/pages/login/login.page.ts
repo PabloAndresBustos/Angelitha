@@ -34,8 +34,8 @@ export class LoginPage implements OnInit {
 
     if(this.loginForm.valid){
 
-      const loading = await this.servicesController.loading();
-      loading.present()
+      /* const loading = await this.servicesController.loading();
+      loading.present() */
 
       this.firebase.login(this.loginForm.value as Usuario).then(res => {
 
@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
       }).finally(() => {
-        loading.dismiss();
+        console.log('LOGIN CORRECTO')
       })
     }
   }
