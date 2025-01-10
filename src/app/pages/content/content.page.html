@@ -16,29 +16,34 @@
   [side]="'end'"/> 
 <!-- Fin del Menu -->
 
-<ion-content style="--background: url(/assets/background.png);">
+@defer {
+  <ion-content style="--background: url(/assets/background.png);">
  
-  @if (visibleElement()) {
-    <div class="product-grid">
+    @if (visibleElement()) {
+      <div class="product-grid">
+  
+      <!-- Modificar con un FOR, para la lista de productos -->
+        <app-product-item />
+        <app-product-item />
+        <app-product-item />
+        <app-product-item />
+        <app-product-item />
+      </div>
+    }
+  
+    <!-- Crear nuevo prouducto -->
+    @if (login()) {
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
+        <ion-fab-button color="warning" (click)="addUpdateProduct()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    }
+  </ion-content>
+}@loading () {
+  <mat-spinner mode="indeterminate" ></mat-spinner>
+}
 
-    <!-- Modificar con un FOR, para la lista de productos -->
-      <app-product-item />
-      <app-product-item />
-      <app-product-item />
-      <app-product-item />
-      <app-product-item />
-    </div>
-  }
-
-  <!-- Crear nuevo prouducto -->
-  @if (login()) {
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
-      <ion-fab-button color="warning" (click)="addUpdateProduct()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  }
-</ion-content>
 
 <!-- <ion-router-outlet id="principal-menu" main></ion-router-outlet> -->
 

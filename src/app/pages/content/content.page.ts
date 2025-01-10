@@ -7,13 +7,14 @@ import { ProductItemComponent } from 'src/app/shared/components/product-item/pro
 import { Product } from 'src/app/interfaces/producto.interfaces';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.page.html',
   styleUrls: ['./content.page.scss'],
   standalone: true,
-  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent]
+  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent, MatProgressSpinner]
 })
 
 export class ContentPage{

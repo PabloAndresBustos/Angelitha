@@ -8,6 +8,10 @@ export const environment = {
     "apiKey":"AIzaSyD3CzJSLwVc0H6QljS0Tx-h4QmYre3DRjI",
     "authDomain":"angelitha-web-app.firebaseapp.com",
     "messagingSenderId":"991356467165"
+  },
+
+  adminUser: {
+    "mail":"judithgiselaledesma@gmail.com"
   }
   
 };

@@ -8,13 +8,16 @@ import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/v
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+const MATERIAL_ELEMENTS = [MatProgressSpinnerModule];
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [SharedModule, ValidatorFormComponent, CustomInputComponent]
+  imports: [SharedModule, ValidatorFormComponent, CustomInputComponent, MATERIAL_ELEMENTS]
 })
 export class LoginPage implements OnInit {
 
