@@ -7,6 +7,7 @@ import { ProductItemComponent } from 'src/app/shared/components/product-item/pro
 import { Product } from 'src/app/interfaces/producto.interfaces';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FooterComponent } from 'src/app/shared/components/footer/footer.compone
   templateUrl: './content.page.html',
   styleUrls: ['./content.page.scss'],
   standalone: true,
-  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent]
+  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent, MatProgressSpinnerModule]
 })
 
 export class ContentPage{
@@ -31,6 +32,10 @@ export class ContentPage{
 
   login(){
     return this.servicesController.login();
+  }
+
+  userType(){
+    return this.servicesController.userType();
   }
 
   addUpdateProduct(){

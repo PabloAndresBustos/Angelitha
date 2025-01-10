@@ -16,6 +16,10 @@ export class ProductItemComponent  implements OnInit {
   login(){
     return this.servicesController.login();
   }
+
+  userType(){
+    return this.servicesController.userType();
+  }
   
   constructor() { }
 

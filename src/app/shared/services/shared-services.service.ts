@@ -15,8 +15,10 @@ export class SharedServicesService {
 
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
+  userType = signal<number>(1);
   login = signal<boolean>(false);
   isMobile = signal<boolean>(false);
+
          
   closeMenu(id:string){
     this.menuController.close(id);
@@ -38,6 +40,11 @@ export class SharedServicesService {
 
   closeModal(data?:any){
     return this.modalController.dismiss(data)
+  }
+
+  /* Usuario Admin o Normal */
+  AdminUser(type:number){
+    type == 0 ? this.login.set(true) : this.login.set(false)
   }
 
   /* Loading */

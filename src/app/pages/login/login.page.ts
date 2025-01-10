@@ -25,7 +25,8 @@ export class LoginPage implements OnInit {
     uid: new FormControl(''),
     name: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required]),
+    type: new FormControl(1)
   });
 
 
@@ -42,15 +43,15 @@ export class LoginPage implements OnInit {
         let userName = res.user.displayName;
         this.loginForm.controls.uid.setValue(uid);
         
-        this.servicesController.login.set(true);
+        /* this.servicesController.login.set(true); - Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
         this.router.navigateByUrl('/home');
 
         /* LocalStorage */ 
         /* delete this.loginForm.controls.password; */
         this.servicesController.saveLogin('user', this.loginForm.value);
 
-        /* let path:string = `Usuario/${uid}`
-        this.userInfo(path, uid); */
+        let path:string = `Usuario/${uid}`
+        this.userInfo(path);
 
         this.servicesController.presentToast({
           header: 'BIENVENIDO',
@@ -79,19 +80,26 @@ export class LoginPage implements OnInit {
     }
   }
 
-  userInfo(path: string, uid:string){
-    this.firebase.obtenerDocumento(path).then((user: Usuario) => {
-      console.log(user);
-    })
-  }
-
+  /* Login With Google */
   async logInWithGoogle(){
     const googleAuth = new GoogleAuthProvider();
     try {
-      await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
+      await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then( res => {
+                               
+        let user: Usuario = {
+          'uid': res.user.uid,
+          'name': res.user.displayName,
+          'email': res.user.email,
+          'type': 1
+        }
 
+        let path:string = `Usuario/${user.uid}` 
+        this.userInfo(path);              
+
+        this.setUserDocument(user.uid, user);
+
+        /* this.servicesController.login.set(true); - Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
         this.router.navigateByUrl('/home');
-        this.servicesController.login.set(true);
   
         this.servicesController.presentToast({
           header: 'BIENVENIDO',
@@ -116,11 +124,29 @@ export class LoginPage implements OnInit {
   
   }
 
+  /* Obtener informacion de usuario desde la Base de datos */
+  userInfo(path: string){
+    this.firebase.obtenerDocumento(path).then((user: Usuario) => {
+      console.log('DataBase user: ', user);
+      this.servicesController.userType.set(user.type);
+      this.servicesController.AdminUser(user.type);
+    })
+  }
+
+  /* Trae el correo desde localstorage para rellenar el formulario  */
   autoLogin(){
     const user:any = this.servicesController.readLocalStorage('user');
     if(user){
       this.loginForm.controls.email.setValue(user.email);
     }
+  }
+
+  /* Crea el documento de usuario en la Base de datos */
+  async setUserDocument(uid: string, user: Usuario) {
+    let path: string = `Usuario/${uid}`
+    this.firebase.createDocument(path, user).then(async res => {
+      console.log(res);
+    })
   }
 
   goToHome(){

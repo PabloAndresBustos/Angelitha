@@ -2,7 +2,6 @@
 @if (!isMobile()) {
 <app-header />
 }
-
 <!-- Fin Header -->
 
 <!-- Menu de la aplicacion -->
@@ -11,7 +10,7 @@
 <!-- Fin del Menu -->
 
 <ion-content style="--background: url(/assets/background.png);">
-
+  
   @if (visibleElement()) {
   <div class="product-grid">
 
@@ -25,7 +24,7 @@
   }
 
   <!-- Crear nuevo prouducto -->
-  @if (login()) {
+  @if (login() && userType() == 0) {
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="warning" (click)="addUpdateProduct()">
       <ion-icon name="add"></ion-icon>

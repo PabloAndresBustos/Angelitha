@@ -24,7 +24,8 @@ export class RegisterPage implements OnInit {
     uid: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)])
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    type: new FormControl(1)
   })
 
   async register() {
