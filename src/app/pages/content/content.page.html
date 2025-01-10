@@ -1,52 +1,42 @@
 <!-- Inicio Header -->
- @if (!isMobile()) {
-  <app-header />
- }
+@if (!isMobile()) {
+<app-header />
+}
 
 <!-- Fin Header -->
 
 <!-- Menu de la aplicacion -->
- <app-menu 
-  [menuId]="'principal-menu'" 
-  [isPrincipal]="true" 
-  [side]="'start'"/>
- <app-menu 
-  [menuId]="'carrito-menu'" 
-  [isPrincipal]="false" 
-  [side]="'end'"/> 
+<app-menu [menuId]="'principal-menu'" [isPrincipal]="true" [side]="'start'" />
+<app-menu [menuId]="'carrito-menu'" [isPrincipal]="false" [side]="'end'" />
 <!-- Fin del Menu -->
 
-@defer {
-  <ion-content style="--background: url(/assets/background.png);">
- 
-    @if (visibleElement()) {
-      <div class="product-grid">
-  
-      <!-- Modificar con un FOR, para la lista de productos -->
-        <app-product-item />
-        <app-product-item />
-        <app-product-item />
-        <app-product-item />
-        <app-product-item />
-      </div>
-    }
-  
-    <!-- Crear nuevo prouducto -->
-    @if (login()) {
-      <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
-        <ion-fab-button color="warning" (click)="addUpdateProduct()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    }
-  </ion-content>
-}@loading () {
-  <mat-spinner mode="indeterminate" ></mat-spinner>
-}
+<ion-content style="--background: url(/assets/background.png);">
+
+  @if (visibleElement()) {
+  <div class="product-grid">
+
+    <!-- Modificar con un FOR, para la lista de productos -->
+    <app-product-item />
+    <app-product-item />
+    <app-product-item />
+    <app-product-item />
+    <app-product-item />
+  </div>
+  }
+
+  <!-- Crear nuevo prouducto -->
+  @if (login()) {
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="warning" (click)="addUpdateProduct()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  }
+</ion-content>
 
 
 <!-- <ion-router-outlet id="principal-menu" main></ion-router-outlet> -->
 
 @if (isMobile()) {
-  <app-footer />
+<app-footer />
 }
