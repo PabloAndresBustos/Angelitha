@@ -6,11 +6,10 @@ import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { IonTextarea } from "@ionic/angular/standalone";
 
 @Component({
-  selector: 'app-add-update-product',
-  templateUrl: './add-update-product.component.html',
-  styleUrls: ['./add-update-product.component.scss'],
-  standalone: true,
-  imports: [IonTextarea, SharedModule, CustomInputComponent]
+    selector: 'app-add-update-product',
+    templateUrl: './add-update-product.component.html',
+    styleUrls: ['./add-update-product.component.scss'],
+    imports: [IonTextarea, SharedModule, CustomInputComponent]
 })
 
 export class AddUpdateProductComponent  implements OnInit {

@@ -4,11 +4,10 @@ import { SharedServicesService } from '../../services/shared-services.service';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  standalone: true,
-  imports: [SharedModule, HeaderComponent]
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    imports: [SharedModule, HeaderComponent]
 })
 export class FooterComponent{
 

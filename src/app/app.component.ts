@@ -6,10 +6,9 @@ import { SharedServicesService } from './shared/services/shared-services.service
 register();
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  standalone: true,
-  imports: [IonApp, IonRouterOutlet],
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    imports: [IonApp, IonRouterOutlet]
 })
 export class AppComponent implements OnInit, AfterViewInit {
 

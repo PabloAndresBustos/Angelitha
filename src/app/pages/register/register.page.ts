@@ -9,11 +9,10 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
-  standalone: true,
-  imports: [SharedModule, CustomInputComponent, ValidatorFormComponent]
+    selector: 'app-register',
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.scss'],
+    imports: [SharedModule, CustomInputComponent, ValidatorFormComponent]
 })
 export class RegisterPage implements OnInit {
 

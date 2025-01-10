@@ -10,11 +10,10 @@ import { FooterComponent } from 'src/app/shared/components/footer/footer.compone
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.page.html',
-  styleUrls: ['./content.page.scss'],
-  standalone: true,
-  imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent, MatProgressSpinner]
+    selector: 'app-content',
+    templateUrl: './content.page.html',
+    styleUrls: ['./content.page.scss'],
+    imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent, MatProgressSpinner]
 })
 
 export class ContentPage{

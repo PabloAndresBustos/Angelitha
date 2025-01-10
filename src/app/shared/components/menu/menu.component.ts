@@ -5,11 +5,10 @@ import { HeaderComponent } from '../header/header.component';
 import { SharedServicesService } from '../../services/shared-services.service';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
-  standalone: true,
-  imports: [SharedModule, HeaderComponent, FooterComponent]
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
+    imports: [SharedModule, HeaderComponent, FooterComponent]
 })
 export class MenuComponent{
 

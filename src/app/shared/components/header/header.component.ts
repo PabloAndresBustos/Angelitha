@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  standalone: true,
-  imports: [SharedModule]
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    imports: [SharedModule]
 })
 export class HeaderComponent implements OnInit{
 

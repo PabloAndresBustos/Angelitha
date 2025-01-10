@@ -4,11 +4,10 @@ import { CarrouselComponent } from './carrousel/carrousel.component';
 import { SharedServicesService } from '../../services/shared-services.service';
 
 @Component({
-  selector: 'app-product-item',
-  templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.scss'],
-  standalone: true,
-  imports: [SharedModule, CarrouselComponent]
+    selector: 'app-product-item',
+    templateUrl: './product-item.component.html',
+    styleUrls: ['./product-item.component.scss'],
+    imports: [SharedModule, CarrouselComponent]
 })
 export class ProductItemComponent  implements OnInit {
 

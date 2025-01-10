@@ -3,11 +3,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-custom-input',
-  templateUrl: './custom-input.component.html',
-  styleUrls: ['./custom-input.component.scss'],
-  standalone: true,
-  imports: [SharedModule]
+    selector: 'app-custom-input',
+    templateUrl: './custom-input.component.html',
+    styleUrls: ['./custom-input.component.scss'],
+    imports: [SharedModule]
 })
 export class CustomInputComponent implements OnInit {
 

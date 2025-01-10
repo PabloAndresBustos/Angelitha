@@ -13,11 +13,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 const MATERIAL_ELEMENTS = [MatProgressSpinnerModule];
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
-  standalone: true,
-  imports: [SharedModule, ValidatorFormComponent, CustomInputComponent, MATERIAL_ELEMENTS]
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
+    imports: [SharedModule, ValidatorFormComponent, CustomInputComponent, MATERIAL_ELEMENTS]
 })
 export class LoginPage implements OnInit {
 
