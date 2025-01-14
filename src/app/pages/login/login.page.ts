@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
         let userName = res.user.displayName;
         this.loginForm.controls.uid.setValue(uid);
         
-        /* this.servicesController.login.set(true); - Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
+        this.servicesController.login.set(true); - /* Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
         this.router.navigateByUrl('/home');
 
         /* LocalStorage */ 
@@ -98,7 +98,7 @@ export class LoginPage implements OnInit {
 
         this.setUserDocument(user.uid, user);
 
-        /* this.servicesController.login.set(true); - Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
+        this.servicesController.login.set(true); - /*  Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
         this.router.navigateByUrl('/home');
   
         this.servicesController.presentToast({
@@ -129,7 +129,7 @@ export class LoginPage implements OnInit {
     this.firebase.obtenerDocumento(path).then((user: Usuario) => {
       console.log('DataBase user: ', user);
       this.servicesController.userType.set(user.type);
-      this.servicesController.AdminUser(user.type);
+      this.servicesController.adminUser();
     })
   }
 

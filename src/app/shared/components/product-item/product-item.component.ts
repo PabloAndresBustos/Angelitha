@@ -13,19 +13,23 @@ export class ProductItemComponent  implements OnInit {
 
   servicesController = inject(SharedServicesService);
 
-  login(){
+/*   login(){
     return this.servicesController.login();
   }
 
   userType(){
     return this.servicesController.userType();
+  } */
+
+  adminUser(){
+    return this.servicesController.userAdmin();
   }
   
   constructor() { }
 
   ngOnInit() {
     console.log(this.servicesController.login())
-    this.login();
+    /* this.login(); */
   }
 
 }

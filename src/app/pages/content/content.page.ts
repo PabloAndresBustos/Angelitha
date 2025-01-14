@@ -34,8 +34,8 @@ export class ContentPage{
     return this.servicesController.login();
   }
 
-  userType(){
-    return this.servicesController.userType();
+  adminUser(){
+    return this.servicesController.userAdmin();
   }
 
   addUpdateProduct(){

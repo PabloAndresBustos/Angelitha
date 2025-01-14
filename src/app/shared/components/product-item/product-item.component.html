@@ -1,6 +1,6 @@
 <ion-card>
 
-  @if (login() && userType() == 0) {
+  @if (adminUser()) {
     <ion-buttons style="display: flex; justify-content: space-around; height: 50px;">
       <ion-button color="success" fill="solid" shape="round">
         <ion-icon slot="start" name="create-outline"></ion-icon>

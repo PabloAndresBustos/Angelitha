@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit{
   logOut(){
     this.firebase.logOut();
     this.serviceController.login.set(false);
+    this.serviceController.userAdmin.set(false);
     this.router.navigateByUrl('/home');
     /* localStorage.removeItem('user'); */
   }

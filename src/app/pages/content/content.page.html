@@ -24,7 +24,7 @@
   }
 
   <!-- Crear nuevo prouducto -->
-  @if (login() && userType() == 0) {
+  @if (adminUser()) {
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="warning" (click)="addUpdateProduct()">
       <ion-icon name="add"></ion-icon>

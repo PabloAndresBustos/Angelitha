@@ -15,7 +15,8 @@ export class SharedServicesService {
 
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
-  userType = signal<number>(1);
+  userType = signal<number>(null);
+  userAdmin = signal<boolean>(false);
   login = signal<boolean>(false);
   isMobile = signal<boolean>(false);
 
@@ -43,8 +44,8 @@ export class SharedServicesService {
   }
 
   /* Usuario Admin o Normal */
-  AdminUser(type:number){
-    type == 0 ? this.login.set(true) : this.login.set(false)
+  adminUser(){
+    this.userType() == 0 ? this.userAdmin.set(true) : this.userAdmin.set(false)
   }
 
   /* Loading */
