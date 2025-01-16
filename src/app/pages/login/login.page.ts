@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
         this.loginForm.controls.uid.setValue(uid);
 
         this.servicesController.login.set(true);
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home');       
 
         /* LocalStorage */
         /* delete this.loginForm.controls.password; */
@@ -109,6 +109,9 @@ export class LoginPage implements OnInit {
 
       /* this.loading(); */
 
+      this.servicesController.userPhoto.set(res.user.photoURL);
+      this.servicesController.userName.set(res.user.displayName);
+      
       let user: Usuario = {
         'uid': res.user.uid,
         'name': res.user.displayName,

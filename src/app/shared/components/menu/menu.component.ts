@@ -16,8 +16,7 @@ export class MenuComponent{
   
   isPrincipal = input<boolean>(true);
   side = input<string>('start');
-  menuId = input<string>('');
-  
+  menuId = input<string>(''); 
   
   productList:string[] = [
     'Agendas', 'Planners', 'Albums', 'Cuadernos', 'Anotadores' 
@@ -29,6 +28,18 @@ export class MenuComponent{
     }else{
       this.serviceController.test.update(value => value = !value);
     }
+  }
+
+  userPhoto(){
+    return this.serviceController.userPhoto();
+  }
+
+  userName(){
+    return this.serviceController.userName();
+  }
+
+  login(){
+    return this.serviceController.login();
   }
 
   /* onWillOpen(){

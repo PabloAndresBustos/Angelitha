@@ -19,6 +19,8 @@ export class SharedServicesService {
   userAdmin = signal<boolean>(false);
   login = signal<boolean>(false);
   isMobile = signal<boolean>(false);
+  userPhoto = signal<string>("");
+  userName = signal<string>("");
 
          
   closeMenu(id:string){

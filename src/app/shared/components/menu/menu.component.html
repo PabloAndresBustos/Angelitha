@@ -17,7 +17,15 @@
     [closeMenuButton]="'principal-menu'"
   />
   <ion-content class="ion-padding" color="warning">
-    <ion-title class="mt-2 mb-2 text-center">
+    @if (userName() && userPhoto()) {
+      <ion-item color="warning">
+        <div style="display: flex; flex-direction: column; margin: 0 auto;">
+          <img [src]="userPhoto()" style="margin: 0 auto; border-radius: 50%;" />
+          <ion-label style="margin: 0 auto; font-weight: bold; color: black;">{{userName()}}</ion-label>
+        </div>
+      </ion-item>
+    }
+    <ion-title class="mt-4 mb-2 text-center">
       Tipo
       <hr>
     </ion-title>
@@ -50,7 +58,7 @@
     </ion-item>
   </ion-content>
   <app-footer [isMenu]="true"/>
-  }@else {
+  }@else{
     <app-header 
     [isMenu]="true" 
     [title]="'Carrito'" 
