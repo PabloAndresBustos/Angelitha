@@ -12,7 +12,7 @@
     <ion-buttons id="carrito-menu" slot="end" >
       @if(login()){
         <ion-button [fill]="logOutButton ? 'clear' : 'fill'" shape="round" color="warning" (click)="logOut()">
-          <ion-icon [slot]="logOutButton ? 'end' : 'icon-only'" name="log-out-outline" style="margin-left: 10px; font-size: 24px;" />
+          <ion-icon [slot]="logOutButton ? 'end' : 'icon-only'" name="log-out-outline" size="large" style="margin-left: 10px; font-size: 24px;" />
           <p class="productButton" >Cerrar Sesion</p>
         </ion-button>
       }

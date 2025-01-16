@@ -8,12 +8,13 @@ import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/v
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss'],
-    imports: [SharedModule, ValidatorFormComponent, CustomInputComponent]
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+  imports: [SharedModule, ValidatorFormComponent, CustomInputComponent]
 })
 export class LoginPage implements OnInit {
 
@@ -30,113 +31,122 @@ export class LoginPage implements OnInit {
   });
 
 
-  async login(){
+  /* Login correcto */
+  welcome(userName:string){
+    return this.servicesController.presentToast({
+      header: 'BIENVENIDO',
+      message: `HOLA! ${userName.toUpperCase()}!!`,
+      duration: 1500,
+      color: 'success',
+      position: 'bottom',
+      icon: 'person-outline'
+    });
+  }
 
-    if(this.loginForm.valid){
+  /* Login Erroneo */
+  loginFail(err:any){
+    return this.servicesController.presentToast({
+      message: `Error de usuario o contraseña: ${err.message}`,
+      duration: 2500,
+      color: 'danger',
+      position: 'middle',
+      icon: 'alert-circle-outline',
+    });
+  }
+
+  /* loading */
+  /* async loading(){
+    const spinner = await this.servicesController.loading();
+    return spinner;
+  } */
+ 
+
+  async login() {
+
+    if (this.loginForm.valid) {
 
       /* const loading = await this.servicesController.loading();
-      loading.present() */
+      loading.present(); */
 
       this.firebase.login(this.loginForm.value as Usuario).then(res => {
 
         let uid = res.user.uid;
-        let userName = res.user.displayName;
         this.loginForm.controls.uid.setValue(uid);
-        
-        this.servicesController.login.set(true); /* Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
+
+        this.servicesController.login.set(true);
         this.router.navigateByUrl('/home');
 
-        /* LocalStorage */ 
+        /* LocalStorage */
         /* delete this.loginForm.controls.password; */
         this.servicesController.saveLogin('user', this.loginForm.value);
 
-        let path:string = `Usuario/${uid}`
+        let path: string = `Usuario/${uid}`
         this.userInfo(path);
 
-        this.servicesController.presentToast({
-          header: 'BIENVENIDO',
-          message: `HOLA! ${userName.toUpperCase()}!!`,
-          duration: 1500,
-          color: 'success',
-          position: 'bottom',
-          icon: 'person-outline'
-        });
-
+        this.welcome(res.user.displayName);
+               
       }).catch(err => {
-        
-        this.servicesController.presentToast({
-          message: `Error de usuario o contraseña: ${err.message}`,
-          duration: 2500,
-          color: 'danger',
-          position: 'middle',
-          icon: 'alert-circle-outline',
-        });
+
+        this.loginFail(err.message);
 
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
-      }).finally(() => {
-        console.log('LOGIN CORRECTO')
+
+      }).finally(async () => {
+
+        this.loginForm.reset();
+      
       })
     }
   }
 
   /* Login With Google */
-  async logInWithGoogle(){
+  async logInWithGoogle() {
     const googleAuth = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then( res => {
-                               
-        let user: Usuario = {
-          'uid': res.user.uid,
-          'name': res.user.displayName,
-          'email': res.user.email,
-          'type': 1
-        }
-
-        let path:string = `Usuario/${user.uid}` 
-        this.userInfo(path);              
-
-        this.setUserDocument(user.uid, user);
-
-        this.servicesController.login.set(true); /*  Se debe realizar la modificacion para que el boton cerrar sesion aparezca en todas las cuentas. */
-        this.router.navigateByUrl('/home');
-  
-        this.servicesController.presentToast({
-          header: 'BIENVENIDO',
-          message: `HOLA! ${res.user.displayName.toUpperCase()}!!`,
-          duration: 1500,
-          color: 'success',
-          position: 'bottom',
-          icon: 'person-outline'
-        });
-  
-      })  
-    } catch (err) {
+    await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
       
-      this.servicesController.presentToast({
-        message: `Error de usuario o contraseña: ${err.message}`,
-        duration: 2500,
-        color: 'danger',
-        position: 'middle',
-        icon: 'alert-circle-outline',
-      });
-    }
-  
+      console.log(res.user);
+
+      /* this.loading(); */
+
+      let user: Usuario = {
+        'uid': res.user.uid,
+        'name': res.user.displayName,
+        'email': res.user.email,
+        'type': environment.adminUser.type
+      }
+
+      let path: string = `Usuario/${user.uid}`
+      this.userInfo(path);
+
+      this.setUserDocument(user.uid, user);
+
+      this.servicesController.login.set(true);
+      this.router.navigateByUrl('/home');
+
+      this.welcome(res.user.displayName);
+
+    }).catch(err => {
+
+      this.loginFail(err.message);
+
+      this.servicesController.login.set(false);
+      this.router.navigateByUrl('/home');
+    })
   }
 
   /* Obtener informacion de usuario desde la Base de datos */
-  userInfo(path: string){
+  userInfo(path: string) {
     this.firebase.obtenerDocumento(path).then((user: Usuario) => {
-      console.log('DataBase user: ', user);
       this.servicesController.userType.set(user.type);
       this.servicesController.adminUser();
     })
   }
 
   /* Trae el correo desde localstorage para rellenar el formulario  */
-  autoLogin(){
-    const user:any = this.servicesController.readLocalStorage('user');
-    if(user){
+  autoLogin() {
+    const user: any = this.servicesController.readLocalStorage('user');
+    if (user) {
       this.loginForm.controls.email.setValue(user.email);
     }
   }
@@ -144,16 +154,14 @@ export class LoginPage implements OnInit {
   /* Crea el documento de usuario en la Base de datos */
   async setUserDocument(uid: string, user: Usuario) {
     let path: string = `Usuario/${uid}`
-    this.firebase.createDocument(path, user).then(async res => {
-      console.log(res);
-    })
+    this.firebase.createDocument(path, user);
   }
 
-  goToHome(){
+  goToHome() {
     this.router.navigateByUrl('/home');
   }
 
-  goToRegister(){
+  goToRegister() {
     this.router.navigateByUrl('/register');
   }
 

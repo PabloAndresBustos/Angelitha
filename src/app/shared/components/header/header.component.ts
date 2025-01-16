@@ -44,7 +44,6 @@ export class HeaderComponent implements OnInit{
   }
 
   logOutButton(){
-    console.log(this.serviceController.isMobile());
     return this.serviceController.isMobile();
   }
 

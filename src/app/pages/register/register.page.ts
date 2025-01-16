@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterPage implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    type: new FormControl(1)
+    type: new FormControl(environment.adminUser.type)
   })
 
   async register() {

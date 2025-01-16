@@ -15,7 +15,7 @@ export const environment = {
   },
 
   adminUser: {
-    "mail":"judithgiselaledesma@gmail.com"
+    "type":1
   }
   
 };
