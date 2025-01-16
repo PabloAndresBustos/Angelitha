@@ -3,6 +3,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { SharedServicesService } from '../../services/shared-services.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-menu',
@@ -13,6 +14,7 @@ import { SharedServicesService } from '../../services/shared-services.service';
 export class MenuComponent{
 
   serviceController = inject(SharedServicesService);
+  router = inject(Router);
   
   isPrincipal = input<boolean>(true);
   side = input<string>('start');
@@ -35,11 +37,15 @@ export class MenuComponent{
   }
 
   userName(){
-    return this.serviceController.userName();
+    return (this.serviceController.userName()).toUpperCase();
   }
 
   login(){
     return this.serviceController.login();
+  }
+
+  goToAdrress(){
+    this.router.navigateByUrl('/adress');
   }
 
   /* onWillOpen(){

@@ -17,11 +17,16 @@
     [closeMenuButton]="'principal-menu'"
   />
   <ion-content class="ion-padding" color="warning">
-    @if (userName() && userPhoto()) {
+    @if (userName()) {
       <ion-item color="warning">
         <div style="display: flex; flex-direction: column; margin: 0 auto;">
-          <img [src]="userPhoto()" style="margin: 0 auto; border-radius: 50%;" />
-          <ion-label style="margin: 0 auto; font-weight: bold; color: black;">{{userName()}}</ion-label>
+          @if (userPhoto()) {
+            <img [src]="userPhoto()" style="margin: 0 auto; border-radius: 50%;" />
+          }
+          <ion-label style="margin: 0 auto; font-weight: bold; color: black;">¡¡Hola {{userName()}} !!</ion-label>
+          <ion-button (click)="goToAdrress()" expand="block" shape="round" color="danger" class="mt-4">
+            Dirección de entrega
+          </ion-button>
         </div>
       </ion-item>
     }

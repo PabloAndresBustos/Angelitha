@@ -73,6 +73,8 @@ export class LoginPage implements OnInit {
         let uid = res.user.uid;
         this.loginForm.controls.uid.setValue(uid);
 
+        this.servicesController.userName.set(res.user.displayName);
+
         this.servicesController.login.set(true);
         this.router.navigateByUrl('/home');       
 

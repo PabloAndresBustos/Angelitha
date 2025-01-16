@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./register.page.scss'],
     imports: [SharedModule, CustomInputComponent, ValidatorFormComponent]
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage{
 
   router = inject(Router);
   firebase = inject(FirebaseService);
@@ -91,10 +91,6 @@ export class RegisterPage implements OnInit {
 
   goToHome() {
     return this.router.navigateByUrl('/home');
-  }
-
-  ngOnInit() {
-
   }
 
 }
