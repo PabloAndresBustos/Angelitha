@@ -21,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'adress',
     loadComponent: () => import('./pages/register/adress/adress.page').then( m => m.AdressPage)
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found.page').then( m => m.NotFoundPage)
   }
 ];
