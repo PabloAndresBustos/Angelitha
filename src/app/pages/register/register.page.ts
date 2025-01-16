@@ -26,7 +26,7 @@ export class RegisterPage implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    type: new FormControl(environment.adminUser.type)
+    type: new FormControl(environment.adminUser)
   })
 
   async register() {

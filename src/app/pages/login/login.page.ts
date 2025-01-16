@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
     name: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    type: new FormControl(1)
+    type: new FormControl(environment.adminUser)
   });
 
 
@@ -113,7 +113,7 @@ export class LoginPage implements OnInit {
         'uid': res.user.uid,
         'name': res.user.displayName,
         'email': res.user.email,
-        'type': environment.adminUser.type
+        'type': environment.adminUser
       }
 
       let path: string = `Usuario/${user.uid}`

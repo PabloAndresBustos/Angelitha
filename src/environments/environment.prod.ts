@@ -10,8 +10,6 @@ export const environment = {
     "messagingSenderId":"991356467165"
   },
 
-  adminUser: {
-    "mail":1
-  }
+  adminUser: 1
   
 };
