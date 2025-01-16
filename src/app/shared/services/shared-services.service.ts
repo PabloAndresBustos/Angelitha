@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MenuController } from "@ionic/angular/standalone";
 import { ModalController, ModalOptions } from "@ionic/angular/standalone";
-import { LoadingController, ToastController, ToastOptions } from "@ionic/angular";
+import { ToastController, ToastOptions } from "@ionic/angular";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class SharedServicesService {
 
   menuController = inject(MenuController);
   modalController = inject(ModalController);
-  loadingCtrl = inject(LoadingController);
   toastController = inject(ToastController);
+  spinnerService  = inject(NgxSpinnerService);
 
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
@@ -51,10 +52,18 @@ export class SharedServicesService {
   }
 
   /* Loading */
-  loading(){
-    return this.loadingCtrl.create({
-      spinner: 'bubbles'
-    })
+  loadingSpinnerShow(){
+    this.spinnerService;
+    this.spinnerService.show(undefined, {
+      type: 'square-jelly-box',
+      bdColor: 'rgba(0, 0, 0, 0.8)',
+      color: '#e2aa11',
+      size: 'medium'
+    });
+  }
+
+  loadingSpinnerHide(){
+    this.spinnerService.hide();
   }
 
   /* Toast */

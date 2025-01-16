@@ -33,9 +33,8 @@ export class RegisterPage{
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
 
-      /* const loading = await this.servicesController.loading();
-      loading.present(); */
-
+      this.servicesController.loadingSpinnerShow();
+      
       return this.firebase.createUser(this.registerForm.value as Usuario).then(async res => {
 
         /* Crear usuario en la base de datos */
@@ -74,7 +73,8 @@ export class RegisterPage{
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
       }).finally(() => {
-        console.log('REGISTRO CORRECTO')
+        this.registerForm.reset();
+        this.servicesController.loadingSpinnerHide();
       })
     }
   }

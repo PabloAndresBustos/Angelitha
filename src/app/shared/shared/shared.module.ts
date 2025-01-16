@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { 
   IonAccordion, 
   IonAccordionGroup, 
@@ -70,7 +71,8 @@ import {
     FormsModule,
     IonFab,
     IonFabButton,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   exports:[
     CommonModule,
@@ -106,7 +108,8 @@ import {
     FormsModule,
     IonFab,
     IonFabButton,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }

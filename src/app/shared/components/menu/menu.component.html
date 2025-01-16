@@ -3,11 +3,6 @@
   [contentId]="menuId()" 
   [side]="side()"
   >
-
-  <!-- (ionWillOpen)="onWillOpen()"
-       (ionDidOpen)="onDidOpen()" 
-       (ionWillClose)="onWillClose()"
-       (ionDidClose)="onDidClose()" -->
        
   @if (isPrincipal()) {
     <app-header 
@@ -23,7 +18,7 @@
           @if (userPhoto()) {
             <img [src]="userPhoto()" style="margin: 0 auto; border-radius: 50%;" />
           }
-          <ion-label style="margin: 0 auto; font-weight: bold; color: black;">¡¡Hola {{userName()}} !!</ion-label>
+          <ion-label style="margin: 0 auto; font-weight: bold; color: black;">¡¡ Hola {{userName()}} !!</ion-label>
           <ion-button (click)="goToAdrress()" expand="block" shape="round" color="danger" class="mt-4">
             Dirección de entrega
           </ion-button>

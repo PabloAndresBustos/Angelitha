@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -68,6 +68,8 @@ export class LoginPage implements OnInit {
       /* const loading = await this.servicesController.loading();
       loading.present(); */
 
+      this.servicesController.loadingSpinnerShow();
+
       this.firebase.login(this.loginForm.value as Usuario).then(res => {
 
         let uid = res.user.uid;
@@ -97,6 +99,7 @@ export class LoginPage implements OnInit {
       }).finally(async () => {
 
         this.loginForm.reset();
+        this.servicesController.loadingSpinnerHide();
       
       })
     }
@@ -108,9 +111,7 @@ export class LoginPage implements OnInit {
     await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
       
       console.log(res.user);
-
-      /* this.loading(); */
-
+      
       this.servicesController.userPhoto.set(res.user.photoURL);
       this.servicesController.userName.set(res.user.displayName);
       

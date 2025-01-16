@@ -14,7 +14,9 @@ export const environment = {
     "messagingSenderId":"991356467165"
   },
 
-  adminUser: 1
+  adminUser: 1,
+
+  proUser: "judithgiselaledesma@gmail.com"
   
 };
 
