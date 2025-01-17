@@ -31,7 +31,9 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonFab,
-  IonFabButton
+  IonFabButton,
+  IonAvatar,
+  IonTextarea
 } from '@ionic/angular/standalone';
 
 
@@ -71,6 +73,8 @@ import {
     FormsModule,
     IonFab,
     IonFabButton,
+    IonAvatar,
+    IonTextarea,
     ReactiveFormsModule,
     NgxSpinnerModule
   ],
@@ -108,6 +112,8 @@ import {
     FormsModule,
     IonFab,
     IonFabButton,
+    IonAvatar,
+    IonTextarea,
     ReactiveFormsModule,
     NgxSpinnerModule
   ]

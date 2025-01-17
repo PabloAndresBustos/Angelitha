@@ -3,6 +3,7 @@ import { MenuController } from "@ionic/angular/standalone";
 import { ModalController, ModalOptions } from "@ionic/angular/standalone";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
 @Injectable({
@@ -86,4 +87,16 @@ export class SharedServicesService {
     return JSON.parse(localStorage.getItem(key));
   }
 
+  /* Camara */
+  async takePicture(promptLabelHeader: string){
+    return await Camera.getPhoto({
+      quality: 100,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+      promptLabelHeader, 
+      promptLabelPhoto: 'Selecciona una imagen',
+      promptLabelPicture: 'Toma una Foto'
+    });
+  }
 }

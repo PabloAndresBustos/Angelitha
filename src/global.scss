@@ -38,3 +38,14 @@
 
 @import "src/styles.css";
 @import 'ngx-toastr/toastr';
+
+.add-update-modal{
+    --border-radius: 18px;
+}
+
+
+@media (min-width: 769px){
+    .add-update-modal{
+        --height: 780px;
+    }
+}

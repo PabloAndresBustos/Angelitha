@@ -39,7 +39,8 @@ export class ContentPage{
 
   addUpdateProduct(){
     this.servicesController.presentModal({
-      component: AddUpdateProductComponent
+      component: AddUpdateProductComponent,
+      cssClass: 'add-update-modal'
     });
   }
 
