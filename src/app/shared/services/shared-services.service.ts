@@ -1,8 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MenuController } from "@ionic/angular/standalone";
 import { ModalController, ModalOptions } from "@ionic/angular/standalone";
-import { ToastController, ToastOptions } from "@ionic/angular";
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class SharedServicesService {
 
   menuController = inject(MenuController);
   modalController = inject(ModalController);
-  toastController = inject(ToastController);
-  spinnerService  = inject(NgxSpinnerService);
+  spinnerService = inject(NgxSpinnerService);
+  toastService = inject(ToastrService);
 
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
@@ -23,12 +24,12 @@ export class SharedServicesService {
   userPhoto = signal<string>("");
   userName = signal<string>("");
 
-         
-  closeMenu(id:string){
+
+  closeMenu(id: string) {
     this.menuController.close(id);
   }
 
-  openMenu(id:string){
+  openMenu(id: string) {
     this.menuController.open(id);
   }
 
@@ -39,21 +40,31 @@ export class SharedServicesService {
 
     const { data } = await modal.onWillDismiss();
 
-    if(data) return data;
+    if (data) return data;
   }
 
-  closeModal(data?:any){
+  closeModal(data?: any) {
     return this.modalController.dismiss(data)
   }
 
   /* Usuario Admin o Normal */
-  adminUser(){
+  adminUser() {
     this.userType() == 0 ? this.userAdmin.set(true) : this.userAdmin.set(false)
   }
 
+  /* Toast */
+  /* Login correcto */
+  welcome(userName: string) {
+    return this.toastService.success(`¡¡HOLA ${userName}`);
+  }
+
+  /* Login Erroneo */
+  loginFail(err: any) {
+    return this.toastService.warning(`Error de usuario o contraseña: ${err.message}`);
+  }
+
   /* Loading */
-  loadingSpinnerShow(){
-    this.spinnerService;
+  loadingSpinnerShow() {
     this.spinnerService.show(undefined, {
       type: 'square-jelly-box',
       bdColor: 'rgba(0, 0, 0, 0.8)',
@@ -62,22 +73,16 @@ export class SharedServicesService {
     });
   }
 
-  loadingSpinnerHide(){
+  loadingSpinnerHide() {
     this.spinnerService.hide();
   }
 
-  /* Toast */
-  async presentToast(opts?: ToastOptions) {
-    const toast = await this.toastController.create(opts);
-    toast.present();
-  }
-
   /* Local Storage */
-  saveLogin(key: string, value: any){
+  saveLogin(key: string, value: any) {
     return localStorage.setItem(key, JSON.stringify(value));
   }
 
-  readLocalStorage(key: string){
+  readLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
 

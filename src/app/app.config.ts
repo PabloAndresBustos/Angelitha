@@ -1,3 +1,4 @@
+import { ProgressAnimationType } from './../../node_modules/ngx-toastr/toastr/toastr-config.d';
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from "@angular/core";
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
@@ -8,6 +9,7 @@ import { environment } from "src/environments/environment";
 import { getAuth, provideAuth } from "@angular/fire/auth";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 
 export const appConfig: ApplicationConfig = {
@@ -15,7 +17,15 @@ export const appConfig: ApplicationConfig = {
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         provideIonicAngular(),
         provideAnimations(),
-        provideZoneChangeDetection({eventCoalescing: true}),
+        provideZoneChangeDetection({
+            eventCoalescing: true
+        }),
+        provideToastr({
+            timeOut: 2500,
+            positionClass: 'toast-bottom-center',
+            progressBar: true,
+            progressAnimation: 'increasing'
+        }),
         provideHttpClient(
             withFetch(),
         ),

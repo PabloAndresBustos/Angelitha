@@ -49,26 +49,13 @@ export class RegisterPage{
 
         await this.firebase.updateUser(this.registerForm.value.name);
 
-        this.servicesController.presentToast({
-          header: 'BIENVENIDO!!',
-          message: `HOLA! ${this.registerForm.value.name.toUpperCase()}!!`,
-          duration: 1500,
-          color: 'success',
-          position: 'bottom',
-          icon: 'person-outline'
-        });
-
+        this.servicesController.welcome(`HOLA! ${this.registerForm.value.name.toUpperCase()}!!`);
+       
         this.router.navigateByUrl('/login');
 
       }).catch(err => {
 
-        this.servicesController.presentToast({
-          message: `Error de usuario o contraseña: ${err.message}`,
-          duration: 2500,
-          color: 'danger',
-          position: 'middle',
-          icon: 'alert-circle-outline',
-        });
+        this.servicesController.loginFail(err.message);
 
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
@@ -84,9 +71,7 @@ export class RegisterPage{
     let path: string = `Usuario/${uid}`
     delete this.registerForm.value.password;
 
-    this.firebase.createDocument(path, this.registerForm.value as Usuario).then(async res => {
-      console.log(res);
-    })
+    this.firebase.createDocument(path, this.registerForm.value as Usuario)
   }
 
   goToHome() {

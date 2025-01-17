@@ -10,6 +10,7 @@ import { SharedServicesService } from 'src/app/shared/services/shared-services.s
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -31,42 +32,9 @@ export class LoginPage implements OnInit {
   });
 
 
-  /* Login correcto */
-  welcome(userName:string){
-    return this.servicesController.presentToast({
-      header: 'BIENVENIDO',
-      message: `HOLA! ${userName.toUpperCase()}!!`,
-      duration: 1500,
-      color: 'success',
-      position: 'bottom',
-      icon: 'person-outline'
-    });
-  }
-
-  /* Login Erroneo */
-  loginFail(err:any){
-    return this.servicesController.presentToast({
-      message: `Error de usuario o contraseña: ${err.message}`,
-      duration: 2500,
-      color: 'danger',
-      position: 'middle',
-      icon: 'alert-circle-outline',
-    });
-  }
-
-  /* loading */
-  /* async loading(){
-    const spinner = await this.servicesController.loading();
-    return spinner;
-  } */
- 
-
   async login() {
 
     if (this.loginForm.valid) {
-
-      /* const loading = await this.servicesController.loading();
-      loading.present(); */
 
       this.servicesController.loadingSpinnerShow();
 
@@ -87,11 +55,11 @@ export class LoginPage implements OnInit {
         let path: string = `Usuario/${uid}`
         this.userInfo(path);
 
-        this.welcome(res.user.displayName);
+        this.servicesController.welcome(res.user.displayName);
                
       }).catch(err => {
 
-        this.loginFail(err.message);
+        this.servicesController.loginFail(err.message);
 
         this.servicesController.login.set(false);
         this.router.navigateByUrl('/home');
@@ -130,11 +98,11 @@ export class LoginPage implements OnInit {
       this.servicesController.login.set(true);
       this.router.navigateByUrl('/home');
 
-      this.welcome(res.user.displayName);
+      this.servicesController.welcome(res.user.displayName);
 
     }).catch(err => {
 
-      this.loginFail(err.message);
+      this.servicesController.loginFail(err.message);
 
       this.servicesController.login.set(false);
       this.router.navigateByUrl('/home');
