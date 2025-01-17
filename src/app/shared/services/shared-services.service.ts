@@ -55,7 +55,7 @@ export class SharedServicesService {
   /* Toast */
   /* Login correcto */
   welcome(userName: string) {
-    return this.toastService.success(`¡¡HOLA ${userName}`);
+    return this.toastService.success(`¡¡HOLA ${userName.toUpperCase()}!!`);
   }
 
   /* Login Erroneo */
