@@ -82,7 +82,7 @@ export class FirebaseService {
   }
 
   /* Almacenamietno de imagenes */
-  async addPicture(path:string, data_url:string){
+  async addPicture(path:string, data_url:any){
     return uploadString(ref(getStorage(), path), data_url, 'data_url').then(() => {
       return getDownloadURL(ref(getStorage(), path));
     })
