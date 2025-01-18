@@ -17,8 +17,14 @@
   <app-custom-input [isPassword]="false" [inputLabel]="'Nombre de producto'" [inputType]="'text'" [iconName]="'add'"
     [formControlValue]="productForm.controls.name" />
 
-  <app-custom-input [isPassword]="false" [inputLabel]="'Subtipo de producto'" [inputType]="'text'" [iconName]="'add'"
-    [formControlValue]="productForm.controls.subType" />
+  <ion-item class="customInput">
+    <ion-icon slot="start" name="add" color="warning"></ion-icon>
+    <ion-select multiple="false" label="Selecciona un tipo" labelPlacement="floating" color="warning" [formControl]="productForm.controls.subType">
+      @for (type of getSubTypes(); track $index) {
+        <ion-select-option value="{{type.type}}">{{type.type}}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>  
 
   <app-custom-input [isPassword]="false" [inputLabel]="'Precio'" [inputType]="'number'" [iconName]="'add'"
     [formControlValue]="productForm.controls.price" />

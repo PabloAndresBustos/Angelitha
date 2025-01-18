@@ -21,6 +21,8 @@ export class AddUpdateProductComponent implements OnInit{
   servicesController = inject(SharedServicesService);
   firebase = inject(FirebaseService);
   toastService = inject(ToastrService);
+
+  user:Usuario = this.servicesController.readLocalStorage('user');
     
   productForm = new FormGroup({
     picture: new FormControl('', [Validators.required]),
@@ -39,20 +41,30 @@ export class AddUpdateProductComponent implements OnInit{
     if(this.productForm.valid){
       
       let dataUrl = this.productForm.value.picture;
+      let path = this.user.uid;
 
       this.productForm.controls.picture.setValue(dataUrl);
 
       this.firebase.addProduct('Productos', this.productForm.value).then(() => {
         this.servicesController.loadingSpinnerShow();
-        this.servicesController.modalController.dismiss();
-        this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
+        this.firebase.addPicture(path, this.productForm.value.picture).then(res =>  {
+          console.log(res);
+          this.servicesController.modalController.dismiss();
+          this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
+        }).catch(err => {
+          this.toastService.error(`error en el almacenamiento de red: ${err}`);
+        })
       }).catch(err => {
         this.toastService.error('No fue posible subir el producto verifica los datos o conexion');
       }).finally(()=> {
         this.servicesController.loadingSpinnerHide();
-        this.firebase.getProducts('Productos');
+        this.firebase.getProducts();
       })
     }
+  }
+
+  getSubTypes(){
+    return this.firebase.productType;
   }
 
   cancel(){
@@ -60,7 +72,7 @@ export class AddUpdateProductComponent implements OnInit{
   }
 
   ngOnInit(){
-    
+    this.firebase.getSubTypes();
   }
 
 }

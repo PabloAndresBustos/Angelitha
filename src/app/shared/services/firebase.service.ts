@@ -7,7 +7,6 @@ import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection } from
 import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { Router } from '@angular/router';
 import { getDocs } from 'firebase/firestore';
-import { Product } from 'src/app/interfaces/producto.interfaces';
 
 
 @Injectable({
@@ -17,9 +16,12 @@ export class FirebaseService {
 
   fireStore = inject(Firestore);  
   router = inject(Router);
-  fireApp = initializeApp(environment.firebaseConfig);
+  fireApp = initializeApp(environment.firebaseConfig, 'principal');
+  storageApp = initializeApp(environment.storageConfig, 'storage');
   fireAuth = getAuth(this.fireApp);
-  productsList:any[]=[];
+  storageAuth = getAuth(this.storageApp);
+  productsList:any[] = [];
+  productType:any[] = [];
   
   /* Autenticacion y creacion de usuario */
   login(user: Usuario) {
@@ -58,8 +60,8 @@ export class FirebaseService {
   }
 
   /* Obtener todos los productos */
-  async getProducts(nameCollection:string){
-    const productCollection = collection(getFirestore(), nameCollection); 
+  async getProducts(){
+    const productCollection = collection(getFirestore(), 'Productos'); 
     const allProducts = await getDocs(productCollection);
 
     this.productsList = [];
@@ -70,6 +72,23 @@ export class FirebaseService {
 
     return  this.productsList;
   }
+
+  /* Subtipos de productos */
+  async getSubTypes(){
+    const subTypesCollection = collection(getFirestore(), 'SubTipos');
+    const allSubTypes = await getDocs(subTypesCollection);
+
+    this.productType = [];
+
+    allSubTypes.forEach(element =>{
+      this.productType.push(element.data());
+    });
+
+    console.log(this.productType);
+
+    return this.productType;
+  }
+
 
   /* Registro de productos en la Base de datos */
   addProduct(path:string, data: any){
@@ -83,8 +102,8 @@ export class FirebaseService {
 
   /* Almacenamietno de imagenes */
   async addPicture(path:string, data_url:any){
-    return uploadString(ref(getStorage(), path), data_url, 'data_url').then(() => {
-      return getDownloadURL(ref(getStorage(), path));
+    return uploadString(ref(getStorage(this.storageApp), path), data_url, 'data_url').then(() => {
+      return getDownloadURL(ref(getStorage(this.storageApp), path));
     })
   }
 

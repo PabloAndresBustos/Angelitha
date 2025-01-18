@@ -59,7 +59,7 @@ export class ContentPage implements OnInit{
 
   async ngOnInit() {
     this.servicesController.loadingSpinnerShow();
-    await this.firebase.getProducts('Productos').then(()=> {
+    await this.firebase.getProducts().then(()=> {
       this.servicesController.loadingSpinnerHide();
     })
   }

@@ -33,7 +33,9 @@ import {
   IonFab,
   IonFabButton,
   IonAvatar,
-  IonTextarea
+  IonTextarea,
+  IonSelect,
+  IonSelectOption
 } from '@ionic/angular/standalone';
 
 
@@ -75,6 +77,8 @@ import {
     IonFabButton,
     IonAvatar,
     IonTextarea,
+    IonSelect,
+    IonSelectOption,
     ReactiveFormsModule,
     NgxSpinnerModule
   ],
@@ -114,6 +118,8 @@ import {
     IonFabButton,
     IonAvatar,
     IonTextarea,
+    IonSelect,
+    IonSelectOption,
     ReactiveFormsModule,
     NgxSpinnerModule
   ]

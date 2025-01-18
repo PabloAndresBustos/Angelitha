@@ -5,9 +5,14 @@
 }
 
 .product-image{
-    width: 95px;
+    width: 300px;
     margin: 0 auto;
     object-fit: cover;
+}
+
+.customInput{
+    width: 60%;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px){
@@ -20,5 +25,9 @@
         width: 135px;
         margin: 0 auto;
         object-fit: cover;
+    }
+
+    .customInput{
+        width: 100%;
     }
 }
