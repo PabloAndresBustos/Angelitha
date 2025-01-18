@@ -2,17 +2,18 @@ import { Component, inject, OnInit} from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { SharedServicesService } from '../../services/shared-services.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { FirebaseService } from '../../services/firebase.service';
 import { ToastrService } from 'ngx-toastr';
+import { ValidatorFormComponent } from '../custom-input/validator-form/validator-form.component';
 
 @Component({
     selector: 'app-add-update-product',
     templateUrl: './add-update-product.component.html',
     styleUrls: ['./add-update-product.component.scss'],
     standalone: true,
-    imports: [SharedModule, CustomInputComponent]
+    imports: [SharedModule, CustomInputComponent, ValidatorFormComponent]
 })
 
 export class AddUpdateProductComponent implements OnInit{
@@ -22,12 +23,11 @@ export class AddUpdateProductComponent implements OnInit{
   toastService = inject(ToastrService);
     
   productForm = new FormGroup({
-    uid: new FormControl(),
-    picture: new FormControl(),
-    name: new FormControl(),
-    subType: new FormControl(),
-    price: new FormControl(),
-    description: new FormControl()
+    picture: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    subType: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required])
   });
 
   async takePicture(){

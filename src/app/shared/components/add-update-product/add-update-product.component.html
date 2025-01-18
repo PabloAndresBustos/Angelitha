@@ -3,16 +3,16 @@
 
   <div class="flex flex-col m-auto">
     @if (productForm.value.picture) {
-      <img [src]="productForm.value.picture" class="product-image" />
+    <img [src]="productForm.value.picture" class="product-image" />
     }@else {
-      <ion-icon name="image-outline" style="font-size: 200px; opacity: 30%; margin: 0 auto;"></ion-icon>
+    <ion-icon name="image-outline" style="font-size: 200px; opacity: 30%; margin: 0 auto;"></ion-icon>
     }
     <ion-button (click)="takePicture()" shape="round" size="small" style="width: 250px; margin: 0 auto;">
       IMAGEN DE PRODUCTO
     </ion-button>
   </div>
 
-  <!-- <div class="flex flex-col items-center justify-center w-full mt-2"> -->
+
   <app-custom-input [isPassword]="false" [inputLabel]="'Nombre de producto'" [inputType]="'text'" [iconName]="'add'"
     [formControlValue]="productForm.controls.name" />
 
@@ -27,11 +27,31 @@
     <ion-textarea labelPlacement="floating" label="Descripcion" color="warning"
       style="width: 360px; height: 99px; margin: 0 auto;" [formControl]="productForm.controls.description" />
   </ion-item>
-  <!-- </div> -->
+
+  @if(productForm.controls.name.errors && productForm.controls.name.touched){
+  <app-validator-form [slot]="'start'" [message]="'El producto debe tener nombre'"
+    [showMessage]="productForm.controls.name.errors?.['required']" />
+  }
+
+  @if (productForm.controls.subType.errors && productForm.controls.subType.touched) {
+  <app-validator-form [slot]="'start'" [message]="'¿Cual es el subtipo del producto?'"
+    [showMessage]="productForm.controls.subType.errors?.['required']" />
+  }
+
+  @if (productForm.controls.price.errors && productForm.controls.price.touched) {
+  <app-validator-form [slot]="'start'" [message]="'Se debe ingresar un precio'"
+    [showMessage]="productForm.controls.price.errors?.['required']" />
+  }
+
+  @if (productForm.controls.description.errors && productForm.controls.description.touched) {
+  <app-validator-form [slot]="'start'" [message]="'Ingresa la descripcion del producto'"
+    [showMessage]="productForm.controls.description.errors?.['required']" />
+  }
+
 
 
   <div class="absolute bottom-0 w-full flex justify-around">
-    <ion-button fill="clear" type="submit" (click)="uploadProduct()">
+    <ion-button fill="clear" type="submit" (click)="uploadProduct()" [disabled]="productForm.invalid">
       <ion-icon slot="icon-only" name="checkmark-circle" color="primary" size="large"></ion-icon>
       Guardar
     </ion-button>
