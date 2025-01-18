@@ -1,0 +1,18 @@
+.description{
+    width: 360px; 
+    height: 150px;
+    margin: 0 auto;
+}
+
+.product-image{
+    width: 100px;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+@media (max-width: 768px){
+    .description{
+        width: 422px; 
+        height: 300px;
+    }
+}

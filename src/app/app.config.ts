@@ -1,15 +1,15 @@
-import { ProgressAnimationType } from './../../node_modules/ngx-toastr/toastr/toastr-config.d';
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from "@angular/core";
+import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
-import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
+import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideRouter,  RouteReuseStrategy, withPreloading, PreloadAllModules } from "@angular/router";
 import { routes } from "./app.routes";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { environment } from "src/environments/environment";
 import { getAuth, provideAuth } from "@angular/fire/auth";
-import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { getFirestore, provideFirestore,  } from "@angular/fire/firestore";
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +21,7 @@ export const appConfig: ApplicationConfig = {
             eventCoalescing: true
         }),
         provideToastr({
+
             timeOut: 2500,
             positionClass: 'toast-bottom-center',
             progressBar: true,
@@ -41,6 +42,9 @@ export const appConfig: ApplicationConfig = {
         provideFirestore(
             () => getFirestore()
         ),
+        provideStorage(
+            () => getStorage()
+        )
     ]
 }
 

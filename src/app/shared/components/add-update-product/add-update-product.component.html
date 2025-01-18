@@ -1,21 +1,18 @@
-<form [formGroup]="productForm">
+<form [formGroup]="productForm" class="relative w-full h-full">
   <img src="../../../../assets/logos/angelita-light-min.jpg" alt="Imagen de producto" class="w-2/5 m-auto mb-8 mt-2">
 
   <div class="flex flex-col m-auto">
-    <ion-avatar style="--border-radius: 15px; width: 200px; height: 150px; margin: 0 auto;">
-      @if (productForm.value.picture) {
-        <img [src]="productForm.value.picture"/>
-      }@else {
-        <ion-icon name="image-outline" style="font-size: 200px; opacity: 30%;"></ion-icon>
-      }
-    </ion-avatar>
-    <br>
+    @if (productForm.value.picture) {
+      <img [src]="productForm.value.picture" class="product-image" />
+    }@else {
+      <ion-icon name="image-outline" style="font-size: 200px; opacity: 30%; margin: 0 auto;"></ion-icon>
+    }
     <ion-button (click)="takePicture()" shape="round" size="small" style="width: 250px; margin: 0 auto;">
       IMAGEN DE PRODUCTO
     </ion-button>
   </div>
 
-
+  <!-- <div class="flex flex-col items-center justify-center w-full mt-2"> -->
   <app-custom-input [isPassword]="false" [inputLabel]="'Nombre de producto'" [inputType]="'text'" [iconName]="'add'"
     [formControlValue]="productForm.controls.name" />
 
@@ -25,14 +22,16 @@
   <app-custom-input [isPassword]="false" [inputLabel]="'Precio'" [inputType]="'number'" [iconName]="'add'"
     [formControlValue]="productForm.controls.price" />
 
-  <ion-item class="w-3/5 m-auto">
+  <ion-item class="description">
     <ion-icon name="list-outline" color="warning" class="mr-8"></ion-icon>
     <ion-textarea labelPlacement="floating" label="Descripcion" color="warning"
-      style="height: 200px; max-height: 200px;" [formControl]="productForm.controls.description" />
+      style="width: 360px; height: 99px; margin: 0 auto;" [formControl]="productForm.controls.description" />
   </ion-item>
+  <!-- </div> -->
 
-  <div class="flex m-auto items-center justify-around mt-8">
-    <ion-button fill="clear">
+
+  <div class="absolute bottom-0 w-full flex justify-around">
+    <ion-button fill="clear" type="submit" (click)="uploadProduct()">
       <ion-icon slot="icon-only" name="checkmark-circle" color="primary" size="large"></ion-icon>
       Guardar
     </ion-button>
