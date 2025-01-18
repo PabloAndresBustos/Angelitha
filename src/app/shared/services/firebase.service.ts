@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { initializeApp } from '@angular/fire/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
@@ -7,6 +7,7 @@ import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection } from
 import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { Router } from '@angular/router';
 import { getDocs } from 'firebase/firestore';
+import { Product } from 'src/app/interfaces/producto.interfaces';
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class FirebaseService {
   router = inject(Router);
   fireApp = initializeApp(environment.firebaseConfig);
   fireAuth = getAuth(this.fireApp);
+  productsList:any[]=[];
   
   /* Autenticacion y creacion de usuario */
   login(user: Usuario) {
@@ -56,15 +58,17 @@ export class FirebaseService {
   }
 
   /* Obtener todos los productos */
-  async getProducts(nameCollection:string, elementList:any[]){
+  async getProducts(nameCollection:string){
     const productCollection = collection(getFirestore(), nameCollection); 
     const allProducts = await getDocs(productCollection);
 
-    allProducts.forEach((element) => {
-      elementList.push(element.data());
+    this.productsList = [];
+
+    allProducts.forEach(element => {
+      this.productsList.push(element.data());
     });
 
-    return elementList;
+    return  this.productsList;
   }
 
   /* Registro de productos en la Base de datos */

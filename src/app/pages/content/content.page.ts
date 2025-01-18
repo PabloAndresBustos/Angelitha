@@ -46,11 +46,22 @@ export class ContentPage implements OnInit{
     });
   }
 
-  productsList:Product[] = []
+ /*  async getAllProducts(){
+    this.servicesController.loadingSpinnerShow();
+    await this.firebase.getProducts('Productos', this.productsList).then(() => {
+      this.servicesController.loadingSpinnerHide();
+    })
+  } */
 
-  ngOnInit() {
-    this.firebase.getProducts('Productos', this.productsList)
-    console.log(this.productsList)
+  productList(){
+    return this.firebase.productsList;
+  }
+
+  async ngOnInit() {
+    this.servicesController.loadingSpinnerShow();
+    await this.firebase.getProducts('Productos').then(()=> {
+      this.servicesController.loadingSpinnerHide();
+    })
   }
   
 }

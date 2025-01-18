@@ -50,6 +50,7 @@ export class AddUpdateProductComponent implements OnInit{
         this.toastService.error('No fue posible subir el producto verifica los datos o conexion');
       }).finally(()=> {
         this.servicesController.loadingSpinnerHide();
+        this.firebase.getProducts('Productos');
       })
     }
   }

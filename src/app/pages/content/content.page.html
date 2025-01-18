@@ -1,3 +1,6 @@
+<!-- Spinner -->
+<ngx-spinner type="square-jelly-box"/>
+
 <!-- Inicio Header -->
 @if (!isMobile()) {
 <app-header />
@@ -15,7 +18,7 @@
   <div class="product-grid">
 
     <!-- Modificar con un FOR, para la lista de productos -->
-    @for (product of productsList; track $index) {
+    @for (product of productList(); track $index) {
       <app-product-item
       [productName]="product.name"
       [productPrice]="product.price"

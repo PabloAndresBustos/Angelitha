@@ -15,7 +15,7 @@ export class SharedServicesService {
   modalController = inject(ModalController);
   spinnerService = inject(NgxSpinnerService);
   toastService = inject(ToastrService);
-
+  
   isFullCart = signal<boolean>(false);
   test = signal<boolean>(true);
   userType = signal<number>(null);
@@ -24,8 +24,7 @@ export class SharedServicesService {
   isMobile = signal<boolean>(false);
   userPhoto = signal<string>("");
   userName = signal<string>("");
-
-
+ 
   closeMenu(id: string) {
     this.menuController.close(id);
   }
