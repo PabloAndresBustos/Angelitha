@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
@@ -7,6 +7,7 @@ import { ProductItemComponent } from 'src/app/shared/components/product-item/pro
 import { Product } from 'src/app/interfaces/producto.interfaces';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 
 @Component({
@@ -17,9 +18,10 @@ import { FooterComponent } from 'src/app/shared/components/footer/footer.compone
   imports: [SharedModule, HeaderComponent, MenuComponent, ProductItemComponent, FooterComponent]
 })
 
-export class ContentPage{
+export class ContentPage implements OnInit{
 
   servicesController = inject(SharedServicesService); 
+  firebase = inject(FirebaseService);
 
   isMobile(){
     return this.servicesController.isMobile();
@@ -44,8 +46,11 @@ export class ContentPage{
     });
   }
 
-  productsList:Product[] = [
-    
-  ]
+  productsList:Product[] = []
+
+  ngOnInit() {
+    this.firebase.getProducts('Productos', this.productsList)
+    console.log(this.productsList)
+  }
   
 }

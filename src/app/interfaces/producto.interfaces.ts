@@ -1,8 +1,8 @@
 export interface Product{
     id: number,
     picture: any,
-    subType: number,
+    subType: string,
     name: string,
     description: string,
-    price: number,
+    price: string,
 }

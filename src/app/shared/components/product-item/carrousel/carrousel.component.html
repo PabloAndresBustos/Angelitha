@@ -8,7 +8,7 @@ pagination-clickable="true"
 >
   @for (picture of pictures; track $index) {
     <swiper-slide>
-      <img alt="image" [src]="picture" />
+      <img alt="image" [src]="productPicture()" class="productImage"/>
     </swiper-slide>
   }
 </swiper-container>

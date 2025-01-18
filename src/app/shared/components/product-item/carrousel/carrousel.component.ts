@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-carrousel',
@@ -8,6 +8,8 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CarrouselComponent implements OnInit{
+
+  productPicture = input.required<string>();
 
   pictureSource:string = 'assets/product';
 

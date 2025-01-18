@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection } from '@angular/fire/firestore';
 import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { Router } from '@angular/router';
+import { getDocs } from 'firebase/firestore';
 
 
 @Injectable({
@@ -52,6 +53,18 @@ export class FirebaseService {
         doc(getFirestore(), path)
       )
     ).data()
+  }
+
+  /* Obtener todos los productos */
+  async getProducts(nameCollection:string, elementList:any[]){
+    const productCollection = collection(getFirestore(), nameCollection); 
+    const allProducts = await getDocs(productCollection);
+
+    allProducts.forEach((element) => {
+      elementList.push(element.data());
+    });
+
+    return elementList;
   }
 
   /* Registro de productos en la Base de datos */

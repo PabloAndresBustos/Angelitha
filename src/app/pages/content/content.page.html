@@ -15,11 +15,15 @@
   <div class="product-grid">
 
     <!-- Modificar con un FOR, para la lista de productos -->
-    <app-product-item />
-    <app-product-item />
-    <app-product-item />
-    <app-product-item />
-    <app-product-item />
+    @for (product of productsList; track $index) {
+      <app-product-item
+      [productName]="product.name"
+      [productPrice]="product.price"
+      [productSubType]="product.subType"
+      [productDescription]="product.description"
+      [productPicture]="product.picture"
+      />
+    }
   </div>
   }
 
