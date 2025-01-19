@@ -31,12 +31,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    
+    this.firebase.fireApp
   }
 
   ngAfterViewInit(){
     this.screenSize();
-    this.firebase.fireApp
   }
 
 }
