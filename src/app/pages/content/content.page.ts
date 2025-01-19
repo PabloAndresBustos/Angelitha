@@ -46,22 +46,14 @@ export class ContentPage implements OnInit{
     });
   }
 
- /*  async getAllProducts(){
-    this.servicesController.loadingSpinnerShow();
-    await this.firebase.getProducts('Productos', this.productsList).then(() => {
-      this.servicesController.loadingSpinnerHide();
-    })
-  } */
-
   productList(){
     return this.firebase.productsList;
   }
 
   async ngOnInit() {
     this.servicesController.loadingSpinnerShow();
-    await this.firebase.getProducts().then(()=> {
-      this.servicesController.loadingSpinnerHide();
-    })
+    await this.firebase.getProducts();
+    this.servicesController.loadingSpinnerHide(); 
   }
   
 }

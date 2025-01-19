@@ -41,20 +41,19 @@ export class AddUpdateProductComponent implements OnInit{
     if(this.productForm.valid){
       
       let dataUrl = this.productForm.value.picture;
-      let path = this.user.uid;
+      let path = `${this.user.uid}/${Date.now()}`;
 
       this.productForm.controls.picture.setValue(dataUrl);
 
+      this.servicesController.loadingSpinnerShow();
+
+      await this.firebase.addPicture(path, this.productForm.value.picture);
+      
       this.firebase.addProduct('Productos', this.productForm.value).then(() => {
-        this.servicesController.loadingSpinnerShow();
-        this.firebase.addPicture(path, this.productForm.value.picture).then(res =>  {
-          this.servicesController.modalController.dismiss();
-          this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
-        }).catch(err => {
-          this.toastService.error(`error en el almacenamiento de red: ${err}`);
-        })
+        this.servicesController.modalController.dismiss();
+        this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
       }).catch(err => {
-        this.toastService.error('No fue posible subir el producto verifica los datos o conexion');
+        this.toastService.error(`No fue posible subir el producto verifica los datos o conexion: ${err}`);
       }).finally(()=> {
         this.servicesController.loadingSpinnerHide();
         this.firebase.getProducts();

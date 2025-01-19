@@ -22,6 +22,9 @@ export class FirebaseService {
   storageAuth = getAuth(this.storageApp);
   productsList:any[] = [];
   productType:any[] = [];
+
+  sotorageConfig = getStorage(this.storageApp);
+  firestoreConfig = getFirestore(this.fireApp);
   
   /* Autenticacion y creacion de usuario */
   login(user: Usuario) {
@@ -45,7 +48,7 @@ export class FirebaseService {
   async createDocument(path: string, data: any) {
     return await setDoc(
       doc(
-        getFirestore(), path
+        this.firestoreConfig, path
       ),
       data
     );
@@ -54,14 +57,14 @@ export class FirebaseService {
   async obtenerDocumento(path: string) {
     return (await
       getDoc(
-        doc(getFirestore(), path)
+        doc(this.firestoreConfig, path)
       )
     ).data()
   }
 
   /* Obtener todos los productos */
   async getProducts(){
-    const productCollection = collection(getFirestore(), 'Productos'); 
+    const productCollection = collection(this.firestoreConfig, 'Productos'); 
     const allProducts = await getDocs(productCollection);
 
     this.productsList = [];
@@ -69,13 +72,11 @@ export class FirebaseService {
     allProducts.forEach(element => {
       this.productsList.push(element.data());
     });
-
-    return  this.productsList;
   }
 
   /* Subtipos de productos */
   async getSubTypes(){
-    const subTypesCollection = collection(getFirestore(), 'SubTipos');
+    const subTypesCollection = collection(this.firestoreConfig, 'SubTipos');
     const allSubTypes = await getDocs(subTypesCollection);
 
     this.productType = [];
@@ -83,10 +84,6 @@ export class FirebaseService {
     allSubTypes.forEach(element =>{
       this.productType.push(element.data());
     });
-
-    console.log(this.productType);
-
-    return this.productType;
   }
 
 
@@ -94,7 +91,7 @@ export class FirebaseService {
   addProduct(path:string, data: any){
     return addDoc(
       collection(
-        getFirestore(), path
+        this.firestoreConfig, path
       ),
       data
     );
@@ -102,8 +99,8 @@ export class FirebaseService {
 
   /* Almacenamietno de imagenes */
   async addPicture(path:string, data_url:any){
-    return uploadString(ref(getStorage(this.storageApp), path), data_url, 'data_url').then(() => {
-      return getDownloadURL(ref(getStorage(this.storageApp), path));
+    return uploadString(ref(this.sotorageConfig, path), data_url, 'data_url').then(() => {
+      return getDownloadURL(ref(this.sotorageConfig, path));
     })
   }
 

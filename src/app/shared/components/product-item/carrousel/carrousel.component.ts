@@ -19,7 +19,6 @@ export class CarrouselComponent implements OnInit{
     for(let i=0; i<5; i++ ){
       this.pictures.push(`${this.pictureSource}/foto${i}.jpg`);
     }
-    console.log(this.pictures);
   }
 
 }
