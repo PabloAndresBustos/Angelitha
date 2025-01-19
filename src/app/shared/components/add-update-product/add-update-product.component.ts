@@ -47,14 +47,16 @@ export class AddUpdateProductComponent implements OnInit{
 
       this.servicesController.loadingSpinnerShow();
 
-      await this.firebase.addPicture(path, this.productForm.value.picture);
-      
-      this.firebase.addProduct('Productos', this.productForm.value).then(() => {
+      await this.firebase.addPicture(path, this.productForm.value.picture).then(res => {
+        console.log(res);
+        this.productForm.controls.picture.setValue(res);
+        this.firebase.addProduct('Productos', this.productForm.value).then(() => {
         this.servicesController.modalController.dismiss();
         this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
+        })
       }).catch(err => {
-        this.toastService.error(`No fue posible subir el producto verifica los datos o conexion: ${err}`);
-      }).finally(()=> {
+        this.toastService.error(`No fue posible subir el producto : ${err}`);
+      }).finally(() => {
         this.servicesController.loadingSpinnerHide();
         this.firebase.getProducts();
       })

@@ -7,12 +7,17 @@ import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection } from
 import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { Router } from '@angular/router';
 import { getDocs } from 'firebase/firestore';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+
+  /* OnlyTest */
+  messageService = inject(ToastrService);
+  /* End Only Test */
 
   fireStore = inject(Firestore);  
   router = inject(Router);
@@ -64,6 +69,7 @@ export class FirebaseService {
 
   /* Obtener todos los productos */
   async getProducts(){
+    this.messageService.info('accediendo a datos...');
     const productCollection = collection(this.firestoreConfig, 'Productos'); 
     const allProducts = await getDocs(productCollection);
 
@@ -72,6 +78,8 @@ export class FirebaseService {
     allProducts.forEach(element => {
       this.productsList.push(element.data());
     });
+
+    this.messageService.info('lista llena de datos...');
   }
 
   /* Subtipos de productos */
