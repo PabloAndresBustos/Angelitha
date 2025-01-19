@@ -69,7 +69,6 @@ export class FirebaseService {
 
   /* Obtener todos los productos */
   async getProducts(){
-    this.messageService.info('accediendo a datos...');
     const productCollection = collection(this.firestoreConfig, 'Productos'); 
     const allProducts = await getDocs(productCollection);
 
@@ -78,8 +77,6 @@ export class FirebaseService {
     allProducts.forEach(element => {
       this.productsList.push(element.data());
     });
-
-    this.messageService.info('lista llena de datos...');
   }
 
   /* Subtipos de productos */

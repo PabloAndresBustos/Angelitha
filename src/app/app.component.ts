@@ -2,7 +2,6 @@ import { AfterViewInit, Component, HostListener, inject, OnInit, signal } from '
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { register } from 'swiper/element/bundle';
 import { SharedServicesService } from './shared/services/shared-services.service';
-import { FirebaseService } from './shared/services/firebase.service';
 
 register();
 
@@ -14,7 +13,6 @@ register();
 export class AppComponent implements OnInit, AfterViewInit {
 
   servicesController = inject(SharedServicesService);
-  firebase = inject(FirebaseService)
 
   with: number;
 
@@ -31,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    this.firebase.fireApp
+  
   }
 
   ngAfterViewInit(){
