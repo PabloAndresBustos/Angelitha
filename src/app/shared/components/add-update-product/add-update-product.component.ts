@@ -48,7 +48,6 @@ export class AddUpdateProductComponent implements OnInit{
       this.firebase.addProduct('Productos', this.productForm.value).then(() => {
         this.servicesController.loadingSpinnerShow();
         this.firebase.addPicture(path, this.productForm.value.picture).then(res =>  {
-          console.log(res);
           this.servicesController.modalController.dismiss();
           this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
         }).catch(err => {
