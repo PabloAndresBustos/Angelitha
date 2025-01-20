@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { browserPopupRedirectResolver, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/validator-form/validator-form.component';
@@ -22,6 +22,11 @@ export class LoginPage implements OnInit {
   router = inject(Router);
   servicesController = inject(SharedServicesService);
   firebase = inject(FirebaseService);
+
+  superUser = environment.proUser;
+
+  /* error capture */
+  errorCapture:any
 
   loginForm = new FormGroup({
     uid: new FormControl(''),
@@ -77,17 +82,20 @@ export class LoginPage implements OnInit {
   async logInWithGoogle() {
     const googleAuth = new GoogleAuthProvider();
     await signInWithPopup(this.firebase.fireAuth, googleAuth, browserPopupRedirectResolver).then(res => {
-      
-      console.log(res.user);
+            
+      const userMail = res.user.email
+      let userType:number;
+
+      userMail == this.superUser ? userType = 0 : userType = 1
       
       this.servicesController.userPhoto.set(res.user.photoURL);
-      this.servicesController.userName.set(res.user.displayName);
+      this.servicesController.userName.set(res.user.displayName);     
       
       let user: Usuario = {
         'uid': res.user.uid,
         'name': res.user.displayName,
         'email': res.user.email,
-        'type': environment.adminUser
+        'type': userType
       }
 
       let path: string = `Usuario/${user.uid}`
@@ -108,6 +116,22 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home');
     })
   }
+
+/*   async logInWithRedirect(){
+    const googleAuth = new GoogleAuthProvider();
+    try {
+      await signInWithRedirect(this.firebase.fireAuth, googleAuth)
+      const result = await getRedirectResult(this.firebase.fireAuth, browserPopupRedirectResolver)
+      if(result){
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        console.log("Usuario autenticado:", user);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  } */
 
   /* Obtener informacion de usuario desde la Base de datos */
   userInfo(path: string) {

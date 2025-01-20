@@ -25,7 +25,7 @@ export const environment = {
 
   adminUser: 1,
 
-  proUser: "judithgiselaledesma@gmail.com"
+  proUser: "pabloandresbustos@gmail.com"
   
 };
 
