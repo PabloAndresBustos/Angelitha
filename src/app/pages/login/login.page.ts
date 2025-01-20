@@ -116,10 +116,13 @@ export class LoginPage implements OnInit {
 
   /* Second login With Google */
   initializeApp() {
-    GoogleAuth.initialize({
-      clientId: '991356467165-bopj7f42st1sdvv2p0i9rnlilaqv4tg6.apps.googleusercontent.com',
-      grantOfflineAccess: true,
-    })
+    if(!isPlatform('capacitor')){
+      GoogleAuth.initialize({
+        grantOfflineAccess: true
+      });
+    }else{
+      this.logInWithGoogle();
+    }
   }
 
   async capacitorSignIn() {
