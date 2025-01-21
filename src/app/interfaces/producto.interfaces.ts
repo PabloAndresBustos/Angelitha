@@ -1,7 +1,7 @@
 import { SubType } from "./subTypes.interface";
 
-export interface Product{
-    id: number,
+export interface Producto{
+    id: string,
     picture: any,
     subType: SubType,
     name: string,

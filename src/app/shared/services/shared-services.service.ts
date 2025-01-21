@@ -4,6 +4,7 @@ import { ModalController, ModalOptions } from "@ionic/angular/standalone";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Producto } from 'src/app/interfaces/producto.interfaces';
 
 
 @Injectable({
@@ -24,6 +25,7 @@ export class SharedServicesService {
   isMobile = signal<boolean>(false);
   userPhoto = signal<string>("");
   userName = signal<string>("");
+  productInCart = signal<Producto[]>([]);
  
   closeMenu(id: string) {
     this.menuController.close(id);

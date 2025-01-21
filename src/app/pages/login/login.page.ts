@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { browserPopupRedirectResolver, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/validator-form/validator-form.component';
@@ -115,22 +115,6 @@ export class LoginPage implements OnInit {
       this.servicesController.login.set(false);
       this.router.navigateByUrl('/home');
     })
-  }
-
-  async logInWithRedirect(){
-    const googleAuth = new GoogleAuthProvider();
-    try {
-      await signInWithRedirect(this.firebase.fireAuth, googleAuth)
-      const result = await getRedirectResult(this.firebase.fireAuth)
-      if(result){
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        const user = result.user;
-        console.log("Usuario autenticado:", user);
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   /* Obtener informacion de usuario desde la Base de datos */

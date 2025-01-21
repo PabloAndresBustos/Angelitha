@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { FirebaseService } from '../../services/firebase.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidatorFormComponent } from '../custom-input/validator-form/validator-form.component';
+import { Producto } from 'src/app/interfaces/producto.interfaces';
 
 @Component({
     selector: 'app-add-update-product',
@@ -25,6 +26,7 @@ export class AddUpdateProductComponent implements OnInit{
   user:Usuario = this.servicesController.readLocalStorage('user');
     
   productForm = new FormGroup({
+    id: new FormControl(''),
     picture: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     subType: new FormControl('', [Validators.required]),
@@ -42,15 +44,27 @@ export class AddUpdateProductComponent implements OnInit{
       
       let dataUrl = this.productForm.value.picture;
       let path = `${this.user.uid}/${Date.now()}`;
+      let productId = `${this.user.uid}` + `${Date.now()}`
 
+      this.productForm.controls.id.setValue(productId);
       this.productForm.controls.picture.setValue(dataUrl);
+
+      /* Convertimos SubType a texto */
+      const producto: Producto = {
+        id: productId, 
+        picture: this.productForm.value.picture,
+        name: this.productForm.value.name,
+        price: this.productForm.value.price,
+        description: this.productForm.value.description,
+        subType: {type: this.productForm.value.subType}
+      }    
 
       this.servicesController.loadingSpinnerShow();
 
       await this.firebase.addPicture(path, this.productForm.value.picture).then(res => {
         console.log(res);
         this.productForm.controls.picture.setValue(res);
-        this.firebase.addProduct('Productos', this.productForm.value).then(() => {
+        this.firebase.addProduct('Productos', producto).then(() => {
         this.servicesController.modalController.dismiss();
         this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
         })

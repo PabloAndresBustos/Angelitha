@@ -8,6 +8,7 @@ import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { Router } from '@angular/router';
 import { getDocs } from 'firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { Producto } from 'src/app/interfaces/producto.interfaces';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class FirebaseService {
   storageApp = initializeApp(environment.storageConfig, 'storage');
   fireAuth = getAuth(this.fireApp);
   storageAuth = getAuth(this.storageApp);
-  productsList:any[] = [];
+  productsList:Producto[] = [];
   productType:any[] = [];
 
   sotorageConfig = getStorage(this.storageApp);
@@ -75,7 +76,8 @@ export class FirebaseService {
     this.productsList = [];
 
     allProducts.forEach(element => {
-      this.productsList.push(element.data());
+      const producto = element.data() as Producto
+      this.productsList.push(producto);
     });
   }
 

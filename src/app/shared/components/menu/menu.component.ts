@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, signal} from '@angular/core';
+import { Component, ElementRef, inject, input, OnInit, signal} from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./menu.component.scss'],
     imports: [SharedModule, HeaderComponent, FooterComponent]
 })
-export class MenuComponent{
+export class MenuComponent implements OnInit{
 
   serviceController = inject(SharedServicesService);
   router = inject(Router);
@@ -46,6 +46,14 @@ export class MenuComponent{
 
   goToAdrress(){
     this.router.navigateByUrl('/adress');
+  }
+
+  productInCart(){
+    return this.serviceController.productInCart();
+  }
+
+  ngOnInit(){
+    this.productInCart()
   }
 
   /* onWillOpen(){
