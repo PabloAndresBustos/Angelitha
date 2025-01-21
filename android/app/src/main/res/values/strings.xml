@@ -4,4 +4,5 @@
     <string name="title_activity_main">Angelitha</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="server_client_id">991356467165-bopj7f42st1sdvv2p0i9rnlilaqv4tg6.apps.googleusercontent.com</string>
 </resources>
