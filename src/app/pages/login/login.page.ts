@@ -1,7 +1,10 @@
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { isPlatform } from '@ionic/angular';
+import { initializeApp } from '@angular/fire/app';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { browserPopupRedirectResolver, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { ValidatorFormComponent } from 'src/app/shared/components/custom-input/validator-form/validator-form.component';
@@ -9,8 +12,6 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { environment } from 'src/environments/environment';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { isPlatform } from '@ionic/angular';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { isPlatform } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor() {
+  constructor(){
     this.initializeApp();
   }
 
@@ -115,39 +116,62 @@ export class LoginPage implements OnInit {
   }
 
   /* Second login With Google */
-  initializeApp() {
-    if(!isPlatform('capacitor')){
-      GoogleAuth.initialize({
-        grantOfflineAccess: true
-      });
-    }else{
-      this.logInWithGoogle();
+/*   async googleSingInRedirect(){
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithRedirect(this.firebase.fireAuth, provider);
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  async capacitorSignIn() {
-    const googleUser = await GoogleAuth.signIn()
-    
-    this.servicesController.userPhoto.set(googleUser.imageUrl);
-    this.servicesController.userName.set(googleUser.name);
+  async resultRedirectObtain(){
+    try {
+      const result = await getRedirectResult(this.firebase.fireAuth);
+      if(result){
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        console.log('Info user: ', user);
+        console.log('Info token: ', token);
+        this.router.navigateByUrl('/home');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  } */
 
-    let user: Usuario = {
-      'uid': googleUser.id,
-      'name': googleUser.name,
-      'email': googleUser.email,
-      'type': environment.adminUser
+    initializeApp(){
+      if(!isPlatform('capacitor')){
+        GoogleAuth.initialize();
+      }
     }
 
-    let path: string = `Usuario/${googleUser.id}`
-    this.userInfo(path);
+    async singIn(){
+      
+      let googleUser = await GoogleAuth.signIn();
 
-    this.setUserDocument(googleUser.id, user);
+      this.servicesController.userPhoto.set(googleUser.imageUrl);
+      this.servicesController.userName.set(googleUser.name);
 
-    this.servicesController.login.set(true);
-    this.router.navigateByUrl('/home');
+      let user: Usuario = {
+        'uid': googleUser.id,
+        'name': googleUser.name,
+        'email': googleUser.email,
+        'type': environment.adminUser
+      }
 
-    this.servicesController.welcome(googleUser.name);
-  }
+      let path: string = `Usuario/${googleUser.id}`
+      this.userInfo(path);
+
+      this.setUserDocument(googleUser.id, user);
+
+      this.servicesController.login.set(true);
+      this.router.navigateByUrl('/home');
+
+      this.servicesController.welcome(googleUser.name);
+
+    }
 
   /* Obtener informacion de usuario desde la Base de datos */
   userInfo(path: string) {
@@ -182,5 +206,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.autoLogin();
   }
+
+  /* ionViewDidEnter(){
+    this.resultRedirectObtain();
+  } */
 
 }
