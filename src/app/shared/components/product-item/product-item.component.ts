@@ -40,9 +40,9 @@ export class ProductItemComponent implements OnInit {
     };
 
     this.servicesController.productInCart().push(selectedProducto);
-
-    console.log(this.servicesController.productInCart());
-
+    
+    this.servicesController.isEmptyCart();
+            
     this.toastService.info(`El producto ${this.productName()} se agrego al carrito`)
   }
 

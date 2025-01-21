@@ -21,8 +21,10 @@ export class HeaderComponent implements OnInit{
   backgroundColor = input<string>('');
   closeMenuButton = input<string>('');
 
-  isFullCart = this.serviceController.isFullCart();
-
+  cartState(){
+    return this.serviceController.isFullCart();
+  }
+  
   closeMenu(){
     this.serviceController.closeMenu(this.closeMenuButton());    
   }

@@ -35,6 +35,15 @@ export class SharedServicesService {
     this.menuController.open(id);
   }
 
+  /* Is full cart */
+  isEmptyCart(){
+    if(this.productInCart().length != 0 ){
+      this.isFullCart.set(true)
+    }else{
+      this.isFullCart.set(false)
+    }
+  }
+
   /* Modal */
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalController.create(opts);

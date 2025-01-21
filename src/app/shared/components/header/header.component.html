@@ -17,7 +17,7 @@
         </ion-button>
 
         <ion-button fill="clear" style="position: relative;" (click)="openCart('carrito-menu')">
-          <div [ngClass]="isFullCart ? 'cart-point' : 'empty-cart'"></div>
+          <div [ngClass]="cartState() ? 'cart-point' : 'empty-cart'"></div>
           <ion-icon name="cart-outline" color="warning"></ion-icon>
         </ion-button>
       }@else {
