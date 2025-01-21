@@ -117,11 +117,11 @@ export class LoginPage implements OnInit {
     })
   }
 
-/*   async logInWithRedirect(){
+  async logInWithRedirect(){
     const googleAuth = new GoogleAuthProvider();
     try {
       await signInWithRedirect(this.firebase.fireAuth, googleAuth)
-      const result = await getRedirectResult(this.firebase.fireAuth, browserPopupRedirectResolver)
+      const result = await getRedirectResult(this.firebase.fireAuth)
       if(result){
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
@@ -131,7 +131,7 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.log(error)
     }
-  } */
+  }
 
   /* Obtener informacion de usuario desde la Base de datos */
   userInfo(path: string) {
