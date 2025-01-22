@@ -61,10 +61,7 @@ export class MenuComponent implements OnInit{
   /* Remover del carrito */
   removeFromCart(id:string){
     const productList = this.serviceController.productInCart();
-    const index = productList.findIndex(product => product.id === id);
-    if(index !== -1){
-      this.serviceController.productInCart().splice(index, 1);
-    }
+    this.serviceController.updateList(id, productList);
     this.serviceController.isEmptyCart();
     this.toastService.info(`El producto se elimino del carrito`);
   }

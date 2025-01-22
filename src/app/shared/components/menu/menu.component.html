@@ -48,11 +48,11 @@
     <ion-card>
       <img alt={{product.id}} src={{product.picture}} style="width: 255px; height: 177px;"/>
       <ion-card-header>
-        <ion-card-title>{{product.name}}</ion-card-title>
+        <ion-card-title>Producto: {{product.name}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        {{product.subType.type}} - {{product.price}}
+       Tipo: {{product.subType.type}} - Precio: {{product.price}}
       </ion-card-content>
       <ion-button (click)="removeFromCart(product.id)" style="display: flex; margin: 0 auto;" fill="clear" color="danger">
         <ion-icon slot="icon-only" name="close-circle-outline" ></ion-icon>

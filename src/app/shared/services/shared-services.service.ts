@@ -40,6 +40,14 @@ export class SharedServicesService {
     this.productInCart().length != 0 ? this.isFullCart.set(true) : this.isFullCart.set(false)
   }
 
+  /* Actulizar listas */
+  updateList(id:string, elements: any[]){
+    const index = elements.findIndex(e => e.id === id);
+    if(index !== -1){
+      elements.splice(index, 1)
+    }
+  }
+
   /* Modal */
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalController.create(opts);

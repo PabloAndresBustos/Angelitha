@@ -83,10 +83,21 @@ export class FirebaseService {
     this.productsList = [];
 
     allProducts.forEach(element => {
-      const producto = element.data() as Producto
+      const producto = element.data() as Producto;
+      producto.id = element.id
       this.productsList.push(producto);
     });
+
+    console.log(this.productsList)
+    console.log(allProducts)
   }
+
+/*   async deleteProduct(productId:string){
+    const product = doc(this.firestoreConfig, 'Productos', productId);
+    console.log(product)
+    await deleteDoc(product);
+    console.log('eliminado correctamente')
+  } */
 
   /* Subtipos de productos */
   async getSubTypes(){
@@ -118,7 +129,7 @@ export class FirebaseService {
     })
   }
 
-  imagePath(url:string){
+  async imagePath(url:string){
     return ref(
       this.sotorageConfig, url
     )

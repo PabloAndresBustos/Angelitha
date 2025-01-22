@@ -52,7 +52,7 @@ export class AddUpdateProductComponent implements OnInit{
       /* Convertimos SubType a texto */
       const producto: Producto = {
         id: productId, 
-        picture: this.productForm.value.picture,
+        picture: '',
         name: this.productForm.value.name,
         price: this.productForm.value.price,
         description: this.productForm.value.description,
@@ -61,9 +61,11 @@ export class AddUpdateProductComponent implements OnInit{
 
       this.servicesController.loadingSpinnerShow();
 
+
+
       await this.firebase.addPicture(path, this.productForm.value.picture).then(res => {
         console.log(res);
-        this.productForm.controls.picture.setValue(res);
+        producto.picture = res;
         this.firebase.addProduct('Productos', producto).then(() => {
         this.servicesController.modalController.dismiss();
         this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
