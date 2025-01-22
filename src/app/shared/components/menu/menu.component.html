@@ -1,84 +1,65 @@
-<ion-menu 
-  [menuId]="menuId()" 
-  [contentId]="menuId()" 
-  [side]="side()"
-  >
-       
+<ion-menu [menuId]="menuId()" [contentId]="menuId()" [side]="side()">
+
   @if (isPrincipal()) {
-    <app-header 
-    [isMenu]="true" 
-    [title]="'Productos'" 
-    [backgroundColor]="'warning'" 
-    [closeMenuButton]="'principal-menu'"
-  />
+  <app-header [isMenu]="true" [title]="'Productos'" [backgroundColor]="'warning'"
+    [closeMenuButton]="'principal-menu'" />
   <ion-content class="ion-padding" color="warning">
     @if (userName()) {
-      <ion-item color="warning">
-        <div class="flex flex-col m-auto">
-          @if (userPhoto()) {
-            <img [src]="userPhoto()" class="m-auto rounded-full"/>
-          }
-          <ion-label class="m-auto font-bold text-black">¡¡ Hola {{userName()}} !!</ion-label>
-          <ion-button (click)="goToAdrress()" expand="block" shape="round" color="danger" class="mt-4">
-            Dirección de entrega
-          </ion-button>
-        </div>
-      </ion-item>
+    <ion-item color="warning">
+      <div class="flex flex-col m-auto">
+        @if (userPhoto()) {
+        <img [src]="userPhoto()" class="m-auto rounded-full" />
+        }
+        <ion-label class="m-auto font-bold text-black">¡¡ Hola {{userName()}} !!</ion-label>
+        <ion-button (click)="goToAdrress()" expand="block" shape="round" color="danger" class="mt-4">
+          Dirección de entrega
+        </ion-button>
+      </div>
+    </ion-item>
     }
     <ion-title class="mt-4 mb-2 text-center">
       Tipo
       <hr>
     </ion-title>
     @for (product of productList; track $index) {
-      <ion-item color="warning">
-        <ion-checkbox labelPlacement="start" (ionChange)="status($event)">{{product}}</ion-checkbox>
-      </ion-item>
-      }
+    <ion-item color="warning">
+      <ion-checkbox labelPlacement="start" (ionChange)="status($event)">{{product}}</ion-checkbox>
+    </ion-item>
+    }
     <ion-title class="mt-16 mb-2 text-center">
       Precio
       <hr>
     </ion-title>
-    <ion-item  class="flex justify-between" color="warning">
-      <ion-input 
-        label="Desde:" 
-        labelPlacement="floating" 
-        type="number" 
-        placeholder="$00.00"
-      >
+    <ion-item class="flex justify-between" color="warning">
+      <ion-input label="Desde:" labelPlacement="floating" type="number" placeholder="$00.00">
       </ion-input>
     </ion-item>
     <ion-item color="warning">
-      <ion-input 
-        label="Hasta:" 
-        labelPlacement="floating" 
-        type="number" 
-        placeholder="$99.99"
-      >
+      <ion-input label="Hasta:" labelPlacement="floating" type="number" placeholder="$99.99">
       </ion-input>
     </ion-item>
   </ion-content>
-  <app-footer [isMenu]="true"/>
+  <app-footer [isMenu]="true" />
   }@else{
-    <app-header 
-    [isMenu]="true" 
-    [title]="'Carrito'" 
-    [backgroundColor]="'warning'" 
-    [closeMenuButton]="'carrito-menu'"
-  />
+  <app-header [isMenu]="true" [title]="'Carrito'" [backgroundColor]="'warning'" [closeMenuButton]="'carrito-menu'" />
   <ion-content class="ion-padding" color="warning">
     @for (product of productInCart(); track $index) {
-      <ion-item style="display: flex; height: 200px; border-radius: 8px; padding: 4px;" color="warning">
-        <div style="display: flex; flex-direction: column; border: solid 1px black; border-radius: 4px;">
-          <ion-label style="margin: 0 auto; font-weight: bold; color: black;" >{{product.name}}</ion-label>
-          <img src={{product.picture}} alt="product-image" style="height: 100px; width: 100px; border-radius: 50%;">
-        </div>
-        <div style="display: flex; flex-direction: column; margin-left: 10px;">
-          <ion-label>Tipo: {{product.subType.type}}</ion-label>
-          <ion-label>Precio: {{product.price}}</ion-label>
-        </div>
-      </ion-item>
+
+    <ion-card>
+      <img alt={{product.id}} src={{product.picture}} style="width: 255px; height: 177px;"/>
+      <ion-card-header>
+        <ion-card-title>{{product.name}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{product.subType.type}} - {{product.price}}
+      </ion-card-content>
+      <ion-button (click)="removeFromCart(product.id)" style="display: flex; margin: 0 auto;" fill="clear" color="danger">
+        <ion-icon slot="icon-only" name="close-circle-outline" ></ion-icon>
+      </ion-button>
+    </ion-card>
     }
   </ion-content>
-  <app-footer [isCart]="true"/>
+  <app-footer [isCart]="true" />
   }
 </ion-menu>

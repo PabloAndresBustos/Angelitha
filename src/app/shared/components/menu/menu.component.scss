@@ -1,6 +1,7 @@
 ion-menu::part(backdrop) {
     display: none;
     background-color: #ac6100;
+    --width: 400px;
 }
 
 ion-menu::part(container){

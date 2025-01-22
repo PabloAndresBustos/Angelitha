@@ -1,11 +1,10 @@
 import { Producto } from 'src/app/interfaces/producto.interfaces';
-
 import { Component, inject, input, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { CarrouselComponent } from './carrousel/carrousel.component';
 import { SharedServicesService } from '../../services/shared-services.service';
-import { idToken } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-product-item',
@@ -16,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductItemComponent implements OnInit {
 
   servicesController = inject(SharedServicesService);
+  firebaseService = inject(FirebaseService);
   toastService = inject(ToastrService);
 
   productId =  input.required<string>();
@@ -44,6 +44,18 @@ export class ProductItemComponent implements OnInit {
     this.servicesController.isEmptyCart();
             
     this.toastService.info(`El producto ${this.productName()} se agrego al carrito`)
+  }
+
+  removeFromPrincipal(id:string, pathPicture:string){
+    let path = `Productos/${id}`
+    let imagePath = this.firebaseService.imagePath(pathPicture)
+
+    this.firebaseService.deleteDocument(path).then( async () => {
+      this.firebaseService.deletePicture(pathPicture).then(()=>{
+        this.firebaseService.getProducts();
+        this.toastService.warning('Producto eliminado correctamente')
+      })
+    })
   }
 
   ngOnInit() {

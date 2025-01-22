@@ -6,7 +6,7 @@
         <ion-icon slot="start" name="create-outline"></ion-icon>
         Editar
       </ion-button>
-      <ion-button color="danger" fill="clear">
+      <ion-button color="danger" fill="clear" (click)="removeFromPrincipal(productId(), productPicture())">
         <ion-icon slot="start" name="trash-outline"></ion-icon>
         Eliminar
       </ion-button>

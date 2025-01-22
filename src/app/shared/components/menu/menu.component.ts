@@ -4,6 +4,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { SharedServicesService } from '../../services/shared-services.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-menu',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit{
 
   serviceController = inject(SharedServicesService);
+  toastService = inject(ToastrService);
   router = inject(Router);
   
   isPrincipal = input<boolean>(true);
@@ -54,6 +56,17 @@ export class MenuComponent implements OnInit{
 
   ngOnInit(){
     this.productInCart()
+  }
+
+  /* Remover del carrito */
+  removeFromCart(id:string){
+    const productList = this.serviceController.productInCart();
+    const index = productList.findIndex(product => product.id === id);
+    if(index !== -1){
+      this.serviceController.productInCart().splice(index, 1);
+    }
+    this.serviceController.isEmptyCart();
+    this.toastService.info(`El producto se elimino del carrito`);
   }
 
   /* onWillOpen(){

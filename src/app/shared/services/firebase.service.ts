@@ -3,10 +3,9 @@ import { initializeApp } from '@angular/fire/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment';
-import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection } from '@angular/fire/firestore';
-import { getStorage,uploadString, ref, getDownloadURL } from 'firebase/storage';
+import { Firestore, getFirestore, setDoc, getDoc, doc, addDoc, collection, deleteDoc, getDocs } from '@angular/fire/firestore';
+import { deleteObject, getStorage, uploadString, ref, getDownloadURL } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { getDocs } from 'firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/interfaces/producto.interfaces';
 
@@ -68,6 +67,14 @@ export class FirebaseService {
     ).data()
   }
 
+  async deleteDocument(path:string){
+    return await deleteDoc(
+      doc(
+        this.firestoreConfig, path
+      )
+    );
+  }
+
   /* Obtener todos los productos */
   async getProducts(){
     const productCollection = collection(this.firestoreConfig, 'Productos'); 
@@ -109,6 +116,21 @@ export class FirebaseService {
     return uploadString(ref(this.sotorageConfig, path), data_url, 'data_url').then(() => {
       return getDownloadURL(ref(this.sotorageConfig, path));
     })
+  }
+
+  imagePath(url:string){
+    return ref(
+      this.sotorageConfig, url
+    )
+    .fullPath
+  }
+
+  deletePicture(path:string){
+    return deleteObject(
+      ref(
+        this.sotorageConfig, path
+      )
+    )
   }
 
 }

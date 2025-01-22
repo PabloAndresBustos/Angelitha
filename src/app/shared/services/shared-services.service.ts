@@ -37,11 +37,7 @@ export class SharedServicesService {
 
   /* Is full cart */
   isEmptyCart(){
-    if(this.productInCart().length != 0 ){
-      this.isFullCart.set(true)
-    }else{
-      this.isFullCart.set(false)
-    }
+    this.productInCart().length != 0 ? this.isFullCart.set(true) : this.isFullCart.set(false)
   }
 
   /* Modal */
