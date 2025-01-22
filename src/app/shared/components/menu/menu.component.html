@@ -54,7 +54,7 @@
       <ion-card-content>
        Tipo: {{product.subType.type}} - Precio: {{product.price}}
       </ion-card-content>
-      <ion-button (click)="removeFromCart(product.id)" style="display: flex; margin: 0 auto;" fill="clear" color="danger">
+      <ion-button (click)="removeFromCart(product.id)" class="flex m-auto" fill="clear" color="danger">
         <ion-icon slot="icon-only" name="close-circle-outline" ></ion-icon>
       </ion-button>
     </ion-card>

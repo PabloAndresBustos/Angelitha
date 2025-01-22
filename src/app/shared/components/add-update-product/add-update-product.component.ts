@@ -63,9 +63,9 @@ export class AddUpdateProductComponent implements OnInit{
 
 
 
-      await this.firebase.addPicture(path, this.productForm.value.picture).then(res => {
-        console.log(res);
-        producto.picture = res;
+      await this.firebase.addPicture(path, this.productForm.value.picture).then(imageUrl => {
+        console.log(imageUrl);
+        producto.picture = imageUrl;
         this.firebase.addProduct('Productos', producto).then(() => {
         this.servicesController.modalController.dismiss();
         this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
