@@ -21,7 +21,7 @@ export class ProductItemComponent implements OnInit {
 
   productId = input.required<string>();
   productName = input.required<string>();
-  productPrice = input.required<string>();
+  productPrice = input.required<number>();
   productSubType = input.required<string>();
   productPicture = input.required<string>();
   productDescription = input.required<string>();
@@ -46,11 +46,21 @@ export class ProductItemComponent implements OnInit {
 
     this.servicesController.isEmptyCart();
 
+    let productsPrice = 0;
+
+    for (let i = 0; i < this.servicesController.productInCart().length; i++) {
+      this.servicesController.totalPrice.set(
+        productsPrice += this.servicesController.productInCart()[i].price
+      )
+    }
+
+    this.servicesController.totalPrice.set(productsPrice);
+
     this.toastService.info(`El producto ${this.productName()} se agrego al carrito`)
   }
 
   async removeFromPrincipal(id: string, pathPicture: string) {
-    
+
     let imagePath = await this.firebaseService.imagePath(pathPicture)
     let firebasePath = `Productos/${id}`
 

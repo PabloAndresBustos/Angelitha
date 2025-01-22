@@ -8,6 +8,7 @@
 
   @if (isCart()) {
     <ion-toolbar class="text-center" color="warning">
+      <ion-title>Total: {{totalPrice()}}</ion-title>
       <ion-button expand="block" fill="outline" (click)="closeCart('carrito-menu')">
         Enviar lista
       </ion-button>

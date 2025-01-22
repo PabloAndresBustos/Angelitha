@@ -26,6 +26,7 @@ export class SharedServicesService {
   userPhoto = signal<string>("");
   userName = signal<string>("");
   productInCart = signal<Producto[]>([]);
+  totalPrice = signal<number>(0);
  
   closeMenu(id: string) {
     this.menuController.close(id);

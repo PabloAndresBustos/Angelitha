@@ -54,7 +54,7 @@ export class AddUpdateProductComponent implements OnInit{
         id: productId, 
         picture: '',
         name: this.productForm.value.name,
-        price: this.productForm.value.price,
+        price: parseFloat(this.productForm.value.price),
         description: this.productForm.value.description,
         subType: {type: this.productForm.value.subType}
       }    
@@ -67,8 +67,8 @@ export class AddUpdateProductComponent implements OnInit{
         console.log(imageUrl);
         producto.picture = imageUrl;
         this.firebase.addProduct('Productos', producto).then(() => {
-        this.servicesController.modalController.dismiss();
-        this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
+          this.servicesController.modalController.dismiss();
+          this.toastService.success(`!!PRODUCTO ${this.productForm.value.name.toUpperCase()} PUBLICADO CORRECTAMENTE`);
         })
       }).catch(err => {
         this.toastService.error(`No fue posible subir el producto : ${err}`);

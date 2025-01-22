@@ -6,5 +6,5 @@ export interface Producto{
     subType: SubType,
     name: string,
     description: string,
-    price: string,
+    price: number,
 }

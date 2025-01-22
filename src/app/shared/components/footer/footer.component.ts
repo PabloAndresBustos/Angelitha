@@ -15,6 +15,10 @@ export class FooterComponent{
 
   isMenu = input<boolean>(false);
   isCart = input<boolean>(false);
+  
+  totalPrice(){
+    return this.serviceController.totalPrice();
+  }
 
   closeCart(id:string){
     if(this.serviceController.isFullCart()){

@@ -63,6 +63,10 @@ export class MenuComponent implements OnInit{
     const productList = this.serviceController.productInCart();
     this.serviceController.updateList(id, productList);
     this.serviceController.isEmptyCart();
+    const productsPrice = productList.reduce((acc, product) => acc + product.price, 0);
+   
+    this.serviceController.totalPrice.set(productsPrice);
+
     this.toastService.info(`El producto se elimino del carrito`);
   }
 
