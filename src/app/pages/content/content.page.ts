@@ -7,6 +7,7 @@ import { ProductItemComponent } from 'src/app/shared/components/product-item/pro
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { Producto } from 'src/app/interfaces/producto.interfaces';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class ContentPage implements OnInit{
     });
   }
 
-  productList(){
+  productList(): Producto[]{
     return this.firebase.productsList;
   }
 

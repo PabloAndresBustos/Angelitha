@@ -92,12 +92,6 @@ export class FirebaseService {
     console.log(allProducts)
   }
 
-/*   async deleteProduct(productId:string){
-    const product = doc(this.firestoreConfig, 'Productos', productId);
-    console.log(product)
-    await deleteDoc(product);
-    console.log('eliminado correctamente')
-  } */
 
   /* Subtipos de productos */
   async getSubTypes(){

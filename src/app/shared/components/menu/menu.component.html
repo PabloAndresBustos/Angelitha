@@ -21,9 +21,9 @@
       Tipo
       <hr>
     </ion-title>
-    @for (product of productList; track $index) {
+    @for (product of productTypeList(); track $index) {
     <ion-item color="warning">
-      <ion-checkbox labelPlacement="start" (ionChange)="status($event)">{{product}}</ion-checkbox>
+      <ion-checkbox labelPlacement="start" (ionChange)="status($event)" (click)="filterType(product.type)">{{product.type}}</ion-checkbox>
     </ion-item>
     }
     <ion-title class="mt-16 mb-2 text-center">
