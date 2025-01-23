@@ -30,7 +30,9 @@ export class MenuComponent implements OnInit {
   }
 
   filterType(type:string){
-    
+    console.log(this.firebaseService.productsList)
+    const filterTypes = this.firebaseService.productsList.filter(producto => producto.subType.type === type)
+    console.log(filterTypes)
   }
 
   status(event: any) {
