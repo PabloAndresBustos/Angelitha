@@ -7,6 +7,7 @@ import { SharedServicesService } from '../../services/shared-services.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SubType } from 'src/app/interfaces/subTypes.interface';
+import { Producto } from 'src/app/interfaces/producto.interfaces';
 
 @Component({
   selector: 'app-menu',
@@ -29,17 +30,12 @@ export class MenuComponent implements OnInit {
     return this.firebaseService.productType
   }
 
-  filterType(type:string){
-    console.log(this.firebaseService.productsList)
-    const filterTypes = this.firebaseService.productsList.filter(producto => producto.subType.type === type)
-    console.log(filterTypes)
-  }
-
-  status(event: any) {
+  status(event: any, type:string) {
     if (event.detail.checked) {
-      this.serviceController.test.update(value => value = !value);
+      const filterTypes:Producto[] = this.firebaseService.productsList().filter(producto => producto.subType.type === type);
+      this.firebaseService.productsList.set(filterTypes);
     } else {
-      this.serviceController.test.update(value => value = !value);
+      this.firebaseService.getProducts();
     }
   }
 

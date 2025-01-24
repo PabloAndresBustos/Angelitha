@@ -17,7 +17,7 @@
   @if (visibleElement()) {
   <div class="product-grid">
     <!-- Modificar con un FOR, para la lista de productos -->
-    @for (product of productList(); track $index) {
+    @for (product of  productList(); track $index) {
       <app-product-item
       [productId]="product.id"
       [productName]="product.name"

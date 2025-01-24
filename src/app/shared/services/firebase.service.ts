@@ -25,7 +25,7 @@ export class FirebaseService {
   storageApp = initializeApp(environment.storageConfig, 'storage');
   fireAuth = getAuth(this.fireApp);
   storageAuth = getAuth(this.storageApp);
-  productsList:Producto[] = [];
+  productsList = signal<Producto[]>([]);
   productType:any[] = [];
 
   sotorageConfig = getStorage(this.storageApp);
@@ -76,20 +76,17 @@ export class FirebaseService {
   }
 
   /* Obtener todos los productos */
-  async getProducts(){
+  async getProducts() {
     const productCollection = collection(this.firestoreConfig, 'Productos'); 
     const allProducts = await getDocs(productCollection);
 
-    this.productsList = [];
+    this.productsList.set([]);
 
     allProducts.forEach(element => {
       const producto = element.data() as Producto;
       producto.id = element.id
-      this.productsList.push(producto);
+      this.productsList().push(producto);
     });
-
-    console.log(this.productsList)
-    console.log(allProducts)
   }
 
 

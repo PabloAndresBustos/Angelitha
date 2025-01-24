@@ -47,7 +47,7 @@ export class ContentPage implements OnInit{
   }
 
   productList(): Producto[]{
-    return this.firebase.productsList;
+    return this.firebase.productsList();
   }
 
   async ngOnInit() {

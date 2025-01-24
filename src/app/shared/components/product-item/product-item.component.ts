@@ -66,7 +66,7 @@ export class ProductItemComponent implements OnInit {
 
     this.firebaseService.deletePicture(imagePath).then(async () => {
 
-      this.servicesController.updateList(id, this.firebaseService.productsList);
+      this.servicesController.updateList(id, this.firebaseService.productsList());
       await this.firebaseService.deleteDocument(firebasePath) 
       
       this.toastService.error('El producto se elimino correctamente');
