@@ -51,12 +51,19 @@ export class ContentPage implements OnInit{
   }
 
   productListLength():boolean{
-    if(this.firebase.productListFilter() <= 2){
-      return true
+    if(!this.servicesController.isMobile()){
+      if(this.firebase.productListFilter() <= 2){
+        return true
+      }else{
+        return false
+      }
     }else{
       return false
     }
+
   }
+
+  
 
   async ngOnInit() {
     this.servicesController.loadingSpinnerShow();

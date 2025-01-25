@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SubType } from 'src/app/interfaces/subTypes.interface';
 import { Producto } from 'src/app/interfaces/producto.interfaces';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -25,6 +26,11 @@ export class MenuComponent implements OnInit {
   isPrincipal = input<boolean>(true);
   side = input<string>('start');
   menuId = input<string>('');
+
+  priceFilterForm = new FormGroup({
+    minPrice: new FormControl(''),
+    maxPrice: new FormControl('')
+  })
 
   productTypeList(): SubType[]{
     return this.firebaseService.productType
@@ -73,7 +79,15 @@ export class MenuComponent implements OnInit {
   }
 
   priceFilter(){
-    console.log('Click')
+    const min:number = 0;
+    const max:number = 9999999;
+    console.log(this.priceFilterForm.value)
+    /* const filterList:Producto[] = this.firebaseService.productsList().filter(producto => {
+      
+    })
+
+    console.log(filterList) */
+    console.log(this.priceFilterForm.value)
   }
 
   ngOnInit() {

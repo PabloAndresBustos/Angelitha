@@ -23,24 +23,27 @@
     </ion-title>
     @for (product of productTypeList(); track $index) {
     <ion-item color="warning">
-      <ion-checkbox labelPlacement="start" (ionChange)="filterPoduct($event, product.type)">{{product.type}}</ion-checkbox>
+      <ion-checkbox labelPlacement="start"
+        (ionChange)="filterPoduct($event, product.type)">{{product.type}}</ion-checkbox>
     </ion-item>
     }
     <ion-title class="mt-16 mb-2 text-center">
       Precio
       <hr>
     </ion-title>
-    <ion-item class="flex justify-between" color="warning">
-      <ion-input label="Desde:" labelPlacement="floating" type="number" placeholder="$00.00">
-      </ion-input>
-    </ion-item>
-    <ion-item color="warning">
-      <ion-input label="Hasta:" labelPlacement="floating" type="number" placeholder="$99.99">
-      </ion-input>
-    </ion-item>
-    <ion-button (click)="priceFilter()" shape="round">
-      Aplicar
-    </ion-button>
+    <form [formGroup]="priceFilterForm">
+      <ion-item class="flex justify-between" color="warning">
+        <ion-input label="Minimo:" labelPlacement="floating" type="number" placeholder="$00.00" [formControl]="priceFilterForm.controls.minPrice" >
+        </ion-input>
+      </ion-item>
+      <ion-item color="warning">
+        <ion-input label="Maximo:" labelPlacement="floating" type="number" placeholder="$99.99" [formControl]="priceFilterForm.controls.maxPrice">
+        </ion-input>
+      </ion-item>
+      <ion-button type="sumbit" (click)="priceFilter()" shape="round" color="danger" [disabled]="priceFilterForm.invalid">
+        Aplicar
+      </ion-button>
+    </form>
   </ion-content>
   <app-footer [isMenu]="true" />
   }@else{
@@ -49,16 +52,16 @@
     @for (product of productInCart(); track $index) {
 
     <ion-card>
-      <img alt={{product.id}} src={{product.picture}} style="width: 255px; height: 177px;"/>
+      <img alt={{product.id}} src={{product.picture}} style="width: 255px; height: 177px;" />
       <ion-card-header>
         <ion-card-title>Producto: {{product.name}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-       Tipo: {{product.subType.type}} - Precio: {{product.price}}
+        Tipo: {{product.subType.type}} - Precio: {{product.price}}
       </ion-card-content>
       <ion-button (click)="removeFromCart(product.id)" class="flex m-auto" fill="clear" color="danger">
-        <ion-icon slot="icon-only" name="close-circle-outline" ></ion-icon>
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
       </ion-button>
     </ion-card>
     }
