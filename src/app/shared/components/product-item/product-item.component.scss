@@ -1,0 +1,9 @@
+.product-item{
+    width: 400px;
+}
+
+@media (max-width: 768px){
+    .product-item{
+        width: 380px;
+    }
+}
