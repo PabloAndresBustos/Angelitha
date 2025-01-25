@@ -30,30 +30,11 @@ ion-content::part(scroll){
     transition: all .2s ease-out;
 }
 
-/* .product-grid-menu-open{
-    margin-top: 2rem;
-    width: 80%;
-    height: 100%;
-    display: grid;
-    margin-left: 20%;
-    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
-    gap: 10px;
-    transition: all .2s ease-out;
-}
-
-.product-grid-cart-open{
-    margin-top: 2rem;
-    width: 80%;
-    height: 100%;
-    display: grid;
-    margin-right: 20%;
-    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
-    gap: 10px;
-    transition: all .2s ease-out;
-} */
-
 @media (max-width: 768px){
     .product-grid{
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
         width: 95%;
     }
 }
