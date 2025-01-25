@@ -23,7 +23,7 @@
     </ion-title>
     @for (product of productTypeList(); track $index) {
     <ion-item color="warning">
-      <ion-checkbox labelPlacement="start" (ionChange)="status($event, product.type)">{{product.type}}</ion-checkbox>
+      <ion-checkbox labelPlacement="start" (ionChange)="filterPoduct($event, product.type)">{{product.type}}</ion-checkbox>
     </ion-item>
     }
     <ion-title class="mt-16 mb-2 text-center">
@@ -38,6 +38,9 @@
       <ion-input label="Hasta:" labelPlacement="floating" type="number" placeholder="$99.99">
       </ion-input>
     </ion-item>
+    <ion-button (click)="priceFilter()" shape="round">
+      Aplicar
+    </ion-button>
   </ion-content>
   <app-footer [isMenu]="true" />
   }@else{

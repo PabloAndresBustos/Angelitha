@@ -1,4 +1,5 @@
-import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { SharedServicesService } from 'src/app/shared/services/shared-services.service';
+import { ApplicationConfig, inject, provideZoneChangeDetection } from "@angular/core";
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideRouter,  RouteReuseStrategy, withPreloading, PreloadAllModules } from "@angular/router";
@@ -11,8 +12,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
-
 export const appConfig: ApplicationConfig = {
+
     providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         provideIonicAngular(),
@@ -21,9 +22,8 @@ export const appConfig: ApplicationConfig = {
             eventCoalescing: true
         }),
         provideToastr({
-
             timeOut: 2500,
-            positionClass: 'toast-bottom-center',
+            positionClass: 'toast-top-center',
             progressBar: true,
             progressAnimation: 'increasing'
         }),
@@ -31,7 +31,6 @@ export const appConfig: ApplicationConfig = {
             withFetch(),
         ),
         provideRouter(routes, withPreloading(PreloadAllModules)),
-
         /* firebase */
         provideFirebaseApp(
             () => initializeApp(environment.firebaseConfig)

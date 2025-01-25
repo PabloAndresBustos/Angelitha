@@ -30,10 +30,11 @@ export class MenuComponent implements OnInit {
     return this.firebaseService.productType
   }
 
-  status(event: any, type:string) {
+  filterPoduct(event: any, type:string) {
     if (event.detail.checked) {
       const filterTypes:Producto[] = this.firebaseService.productsList().filter(producto => producto.subType.type === type);
       this.firebaseService.productsList.set(filterTypes);
+      this.firebaseService.productListFilter.set(this.firebaseService.productsList().length);
     } else {
       this.firebaseService.getProducts();
     }
@@ -69,6 +70,10 @@ export class MenuComponent implements OnInit {
     this.serviceController.totalPrice.set(productsPrice);
 
     this.toastService.info(`El producto se elimino del carrito`);
+  }
+
+  priceFilter(){
+    console.log('Click')
   }
 
   ngOnInit() {

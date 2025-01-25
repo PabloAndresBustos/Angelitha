@@ -26,6 +26,7 @@ export class FirebaseService {
   fireAuth = getAuth(this.fireApp);
   storageAuth = getAuth(this.storageApp);
   productsList = signal<Producto[]>([]);
+  productListFilter = signal<number>(null);
   productType:any[] = [];
 
   sotorageConfig = getStorage(this.storageApp);
@@ -87,6 +88,8 @@ export class FirebaseService {
       producto.id = element.id
       this.productsList().push(producto);
     });
+
+    this.productListFilter.set(this.productsList().length)
   }
 
 

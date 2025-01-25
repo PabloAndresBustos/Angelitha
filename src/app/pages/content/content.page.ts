@@ -50,6 +50,14 @@ export class ContentPage implements OnInit{
     return this.firebase.productsList();
   }
 
+  productListLength():boolean{
+    if(this.firebase.productListFilter() <= 2){
+      return true
+    }else{
+      return false
+    }
+  }
+
   async ngOnInit() {
     this.servicesController.loadingSpinnerShow();
     await this.firebase.getProducts();

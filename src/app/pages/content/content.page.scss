@@ -11,7 +11,7 @@ ion-content::part(scroll){
 
 .product-grid{
     margin-top: 2rem;
-    width: 95%;
+    width: 90%;
     height: 100%;
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(400px, 1fr));
@@ -20,7 +20,17 @@ ion-content::part(scroll){
 
 }
 
-.product-grid-menu-open{
+.product-grid-filter{
+    margin-top: 2rem;
+    width: 45%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr));
+    gap: 10px;
+    transition: all .2s ease-out;
+}
+
+/* .product-grid-menu-open{
     margin-top: 2rem;
     width: 80%;
     height: 100%;
@@ -40,7 +50,7 @@ ion-content::part(scroll){
     grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
     gap: 10px;
     transition: all .2s ease-out;
-}
+} */
 
 @media (max-width: 768px){
     .product-grid{
