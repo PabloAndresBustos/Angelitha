@@ -23,8 +23,9 @@
     </ion-title>
     @for (product of productTypeList(); track $index) {
     <ion-item color="warning">
-      <ion-checkbox labelPlacement="start"
-        (ionChange)="filterPoduct($event, product.type)">{{product.type}}</ion-checkbox>
+      <ion-checkbox 
+        labelPlacement="start"
+        (ionChange)="filterPoduct($event, product.type)" [checked]="checked()">{{product.type}}</ion-checkbox>
     </ion-item>
     }
     <ion-title class="mt-16 mb-2 text-center">
@@ -33,16 +34,31 @@
     </ion-title>
     <form [formGroup]="priceFilterForm">
       <ion-item class="flex justify-between" color="warning">
-        <ion-input label="Minimo:" labelPlacement="floating" type="number" placeholder="$00.00" [formControl]="priceFilterForm.controls.minPrice" >
+        <ion-input label="Minimo:" labelPlacement="floating" type="number" placeholder="$00.00"
+          [formControl]="priceFilterForm.controls.minPrice">
         </ion-input>
       </ion-item>
       <ion-item color="warning">
-        <ion-input label="Maximo:" labelPlacement="floating" type="number" placeholder="$99.99" [formControl]="priceFilterForm.controls.maxPrice">
+        <ion-input label="Maximo:" labelPlacement="floating" type="number" placeholder="$99999.99"
+          [formControl]="priceFilterForm.controls.maxPrice">
         </ion-input>
       </ion-item>
-      <ion-button type="sumbit" (click)="priceFilter()" shape="round" color="danger" [disabled]="priceFilterForm.invalid" style="margin-left: 70px;">
-        Aplicar
-      </ion-button>
+      <div style="display: flex; justify-content: space-around;">
+        <ion-button type="sumbit" (click)="priceFilter()" color="danger" [disabled]="priceFilterForm.invalid">
+          Aplicar
+        </ion-button>
+        <ion-button (click)="restore()" color="primary">
+          Restablecer
+        </ion-button>
+      </div>
+      @if (priceFilterForm.controls.minPrice.errors && priceFilterForm.controls.minPrice.touched) {
+      <app-validator-form [slot]="'start'" [message]="'Debe ingresar un valor minimo'"
+        [showMessage]="priceFilterForm.controls.minPrice.errors?.['required']" />
+      }
+      @if (priceFilterForm.controls.maxPrice.errors && priceFilterForm.controls.maxPrice.touched) {
+      <app-validator-form [slot]="'start'" [message]="'Debe ingresar un valor maximo'"
+        [showMessage]="priceFilterForm.controls.maxPrice.errors?.['required']" />
+      }
     </form>
   </ion-content>
   <app-footer [isMenu]="true" />
@@ -50,7 +66,6 @@
   <app-header [isMenu]="true" [title]="'Carrito'" [backgroundColor]="'warning'" [closeMenuButton]="'carrito-menu'" />
   <ion-content class="ion-padding" color="warning">
     @for (product of productInCart(); track $index) {
-
     <ion-card>
       <img alt={{product.id}} src={{product.picture}} style="width: 255px; height: 177px;" />
       <ion-card-header>

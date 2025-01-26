@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SubType } from 'src/app/interfaces/subTypes.interface';
 import { Producto } from 'src/app/interfaces/producto.interfaces';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatorFormComponent } from '../custom-input/validator-form/validator-form.component';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
-  imports: [SharedModule, HeaderComponent, FooterComponent]
+  imports: [SharedModule, HeaderComponent, FooterComponent, ValidatorFormComponent]
 })
 export class MenuComponent implements OnInit {
 
@@ -26,10 +27,11 @@ export class MenuComponent implements OnInit {
   isPrincipal = input<boolean>(true);
   side = input<string>('start');
   menuId = input<string>('');
+  checked = signal<boolean>(false);
 
   priceFilterForm = new FormGroup({
-    minPrice: new FormControl(''),
-    maxPrice: new FormControl('')
+    minPrice: new FormControl('', [Validators.required]),
+    maxPrice: new FormControl('', [Validators.required])
   })
 
   productTypeList(): SubType[]{
@@ -44,6 +46,26 @@ export class MenuComponent implements OnInit {
     } else {
       this.firebaseService.getProducts();
     }
+  }
+
+  priceFilter(){
+    let min:number = parseFloat(this.priceFilterForm.controls.minPrice.value);
+    let max:number = parseFloat(this.priceFilterForm.controls.maxPrice.value);
+   
+    const filterList:Producto[] = [];
+
+    this.firebaseService.productsList().map( product => {
+      if(product.price >= min && product.price <= max){
+        filterList.push(product)
+      }
+    });
+
+    this.firebaseService.productsList.set(filterList);
+  }
+
+  restore(){
+    this.firebaseService.getProducts();
+    this.priceFilterForm.reset();
   }
 
   userPhoto() {
@@ -76,18 +98,6 @@ export class MenuComponent implements OnInit {
     this.serviceController.totalPrice.set(productsPrice);
 
     this.toastService.info(`El producto se elimino del carrito`);
-  }
-
-  priceFilter(){
-    const min:number = 0;
-    const max:number = 9999999;
-    console.log(this.priceFilterForm.value)
-    /* const filterList:Producto[] = this.firebaseService.productsList().filter(producto => {
-      
-    })
-
-    console.log(filterList) */
-    console.log(this.priceFilterForm.value)
   }
 
   ngOnInit() {
