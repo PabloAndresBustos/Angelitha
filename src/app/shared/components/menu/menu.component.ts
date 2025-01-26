@@ -105,23 +105,4 @@ export class MenuComponent implements OnInit {
     this.firebaseService.getSubTypes();
   }
 
-
-
-  /* onWillOpen(){
-    this.serviceController.isMenuOpen.update(value => !value);
-    this.serviceController.isCartOpen.update(value => !value);
-  } */
-  /* onWillClose(){
-    this.serviceController.isMenuOpen.update(value => !value);
-    this.serviceController.isCartOpen.update(value => !value);
-  } */
-  /* onDidOpen(){
-    this.serviceController.isMenuOpen.update(value => !value);
-    this.serviceController.isCartOpen.update(value => !value);
-  } */
-  /* onDidClose(){
-    this.serviceController.isMenuOpen.update(value => !value);
-    this.serviceController.isCartOpen.update(value => !value);
-  } */
-
 }

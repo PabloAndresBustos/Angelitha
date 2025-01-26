@@ -1,9 +1,11 @@
 .product-item{
     width: 400px;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px){
     .product-item{
         width: 380px;
+        margin: 0 auto;
     }
 }
